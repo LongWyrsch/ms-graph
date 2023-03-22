@@ -2,6 +2,7 @@ import { AuthenticatedTemplate, UnauthenticatedTemplate, useIsAuthenticated } fr
 import SignInButton from '../components/SignInButton'
 import SignOutButton from '../components/SignOutButton'
 import CalEvents from '@/components/CalEvents'
+import BarChartData from '@/components/BarChartData'
 
 export default function Home() {
 	const isAuthenticated = useIsAuthenticated()
@@ -18,6 +19,7 @@ export default function Home() {
 			<UnauthenticatedTemplate>
 				<p>You are not signed in! Please sign in.</p>
 			</UnauthenticatedTemplate>
+			<BarChartData/>
 		</div>
 	)
 }
