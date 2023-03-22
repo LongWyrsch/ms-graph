@@ -46,31 +46,12 @@ const ProfileContent = () => {
 	)
 }
 
-export default function Home() {
-	// const [userName, setUserName] = useState<string>('')
-	// const { instance } = useMsal()
-	// const activeAccount = instance.getActiveAccount()
-	
+export default function Home() {	
 	const isAuthenticated = useIsAuthenticated();
 
-	// useEffect(() => {
-	// 	if (activeAccount) {
-	// 		setUserName(activeAccount.username)
-	// 	} else {
-	// 		setUserName('')
-	// 	}
-	// }, [activeAccount])
 
 	return (
 		<div className={styles.container}>
-				{/* <Welcome />
-				{userName ? (
-					<>
-						<Logout />
-					</>
-				) : (
-					<LogIn />
-				)} */}
 				{ isAuthenticated ? <SignOutButton /> : <SignInButton /> }
 				<AuthenticatedTemplate>
 					<p>You are signed in!</p>
