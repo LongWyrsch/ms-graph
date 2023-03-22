@@ -1,7 +1,7 @@
 import React from 'react'
 import { useMsal } from '@azure/msal-react';
 
-export default function Logout() {
+export default function SignOutButton() {
     const { instance } = useMsal();
 
     const handleLogout = () => {
@@ -11,8 +11,8 @@ export default function Logout() {
     }
 
     return (
-        <div style={{ padding: "24px" }}>
-            <button onClick={handleLogout}>Logout</button>
+        <div style={{ padding: "5px", position: 'absolute', top: '0', right: '0'}}>
+            <button onClick={handleLogout} style={{fontSize: '1rem'}}>Logout</button>
         </div>
     )
 }

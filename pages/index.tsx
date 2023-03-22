@@ -1,9 +1,10 @@
 import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from '@azure/msal-react'
 import { useEffect, useState } from 'react'
-import LogIn from '../components/Login'
-import Logout from '../components/Logout'
-import Welcome from '../components/Welcome'
+import SignInButton from '../components/SignInButton'
+import SignOutButton from '../components/SignOutButton'
+// import Welcome from '../components/Welcome'
 import styles from '../styles/Home.module.css'
+import { useIsAuthenticated } from "@azure/msal-react";
 
 import { loginRequest } from '../config/authConfig'
 import { callMsGraph } from '../config/graph'
@@ -46,28 +47,31 @@ const ProfileContent = () => {
 }
 
 export default function Home() {
-	const [userName, setUserName] = useState<string>('')
-	const { instance } = useMsal()
-	const activeAccount = instance.getActiveAccount()
-	useEffect(() => {
-		if (activeAccount) {
-			setUserName(activeAccount.username)
-		} else {
-			setUserName('')
-		}
-	}, [activeAccount])
+	// const [userName, setUserName] = useState<string>('')
+	// const { instance } = useMsal()
+	// const activeAccount = instance.getActiveAccount()
+	
+	const isAuthenticated = useIsAuthenticated();
+
+	// useEffect(() => {
+	// 	if (activeAccount) {
+	// 		setUserName(activeAccount.username)
+	// 	} else {
+	// 		setUserName('')
+	// 	}
+	// }, [activeAccount])
 
 	return (
 		<div className={styles.container}>
-			<main className={styles.main}>
-				<Welcome />
+				{/* <Welcome />
 				{userName ? (
 					<>
 						<Logout />
 					</>
 				) : (
 					<LogIn />
-				)}
+				)} */}
+				{ isAuthenticated ? <SignOutButton /> : <SignInButton /> }
 				<AuthenticatedTemplate>
 					<p>You are signed in!</p>
 					<ProfileContent />
@@ -75,9 +79,7 @@ export default function Home() {
 				<UnauthenticatedTemplate>
 					<p>You are not signed in! Please sign in.</p>
 				</UnauthenticatedTemplate>
-			</main>
 
-			<footer className={styles.footer}>This is footer</footer>
 		</div>
 	)
 }
