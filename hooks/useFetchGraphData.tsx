@@ -7,7 +7,7 @@ export const useFetchGraphData = () => {
 	const { instance, accounts } = useMsal()
 	// const [loadingData, setLoadingData] = useState(false)
 	const [events, setEvents] = useState(null)
-	// const [tasks, setTasks] = useState(null)
+	const [tasks, setTasks] = useState(null)
 
 	const request = {
 		...loginRequest,
@@ -19,15 +19,21 @@ export const useFetchGraphData = () => {
 			// set data to loading
 			// setLoadingData(true)
 
-			const fetchDataWithToken = (response: { accessToken: string }) => {
-				callMsGraphBatch(response.accessToken).then((response) => {
+			// Fetch events and tasks
+			const fetchDataWithToken = (accessToken: string) => {
+				// get events
+				callMsGraphBatch(accessToken).then((response) => {
 					setEvents(response.responses)
-					// setLoadingData(false)
+
+					// Once events are fetched, get tasks
+					callMsGraph(
+						'https://graph.microsoft.com/v1.0/me/todo/lists/AQMkADAwATNiZmYAZC1jZDUwLTFmOWItMDACLTAwCgAuAAAD6KEmf4NA006sAzSRFCKcLQEABbbzqMwVoEedSATsfRywKwAGDs4OAwAAAA==/tasks',
+						accessToken
+					).then((response) => {
+						setTasks(response.value)
+						// setLoadingData(false)
+					})
 				})
-				// callMsGraph("https://graph.microsoft.com/v1.0/me/todo/lists/AQMkADAwATNiZmYAZC1jZDUwLTFmOWItMDACLTAwCgAuAAAD6KEmf4NA006sAzSRFCKcLQEABbbzqMwVoEedSATsfRywKwAGDs4OAwAAAA==/tasks" ,response.accessToken).then((response) => {
-				// 	setTasks(response)
-				// 	// setLoadingData(false)
-				// })
 			}
 
 			// Silently acquires an access token which is then attached to a request for Microsoft Graph data
@@ -35,12 +41,14 @@ export const useFetchGraphData = () => {
 				.acquireTokenSilent(request)
 				// access token still valid
 				.then((response) => {
-					fetchDataWithToken(response)
+					const accessToken = response.accessToken
+					fetchDataWithToken(accessToken)
 				})
 				// access token invalid, request new using refresh token
 				.catch((e) => {
 					instance.acquireTokenPopup(request).then((response) => {
-						fetchDataWithToken(response)
+						const accessToken = response.accessToken
+						fetchDataWithToken(accessToken)
 					})
 				})
 		}
@@ -48,5 +56,5 @@ export const useFetchGraphData = () => {
 		fetchData()
 	}, [])
 
-	return [events]
+	return [events, tasks]
 }
