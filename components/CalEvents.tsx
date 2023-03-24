@@ -1,5 +1,5 @@
 import { loginRequest } from '@/config/authConfig'
-import { callMsGraph } from '@/config/graph'
+import { callMsGraph, callMsGraphBatch } from '@/config/graph'
 import { useMsal } from '@azure/msal-react'
 import React, { useEffect, useState } from 'react'
 
@@ -28,12 +28,12 @@ const CalEvents = () => {
 			.acquireTokenSilent(request)
             // access token still valid
 			.then((response) => {
-				callMsGraph(response.accessToken).then((response) => setGraphData(response.value))
+				callMsGraphBatch(response.accessToken).then((response) => setGraphData(response.responses[4].body.value))
 			})
             // access token invalid, request new using refresh token 
 			.catch((e) => {
 				instance.acquireTokenPopup(request).then((response) => {
-					callMsGraph(response.accessToken).then((response) => setGraphData(response.value))
+					callMsGraphBatch(response.accessToken).then((response) => setGraphData(response))
 				})
 			})
 	}, [])
@@ -42,14 +42,14 @@ const CalEvents = () => {
 
 	return (
         <div>
-            {graphData?.map((event, i)=> (
+            {/* {graphData?.map((event, i)=> (
                     <div key={i}>
                         <div>{event.subject}</div>
                         <div>{event.start.dateTime}</div>
                         <br/>
                     </div>
             )
-            )}
+            )} */}
         </div>
     )
 }
