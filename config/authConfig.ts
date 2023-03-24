@@ -17,7 +17,7 @@ export const msalConfig: Configuration = {
 // Add here scopes for id token to be used at MS Identity Platform endpoints.
 export const loginRequest: RedirectRequest = {
     // I tried "Calendars.Read.Share" but it didn't give me access to my calendar events.
-    scopes: ["User.Read", "Calendars.Read"]
+    scopes: ["User.Read", "Calendars.Read", "Tasks.Read"]
 };
 
 // Add here the endpoints for MS Graph API services you would like to use.

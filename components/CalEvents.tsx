@@ -1,48 +1,29 @@
 import { loginRequest } from '@/config/authConfig'
-import { callMsGraph, callMsGraphBatch } from '@/config/graph'
+import { callMsGraph, callMsGraphBatch } from '@/config/graphQuery'
+import { useFetchGraphData } from '@/hooks/useFetchGraphData'
+
 import { useMsal } from '@azure/msal-react'
 import React, { useEffect, useState } from 'react'
 
-interface event {
-    id: String
-    subject: String
-    start: {
-        dateTime: String
-    }
-}
-
-type GraphData = event[]|null
-
 const CalEvents = () => {
-	const { instance, accounts } = useMsal()
-	const [graphData, setGraphData] = useState<GraphData>(null)
+	const [events] = useFetchGraphData()
 
-	const request = {
-		...loginRequest,
-		account: accounts[0],
-	}
-
-	// Silently acquires an access token which is then attached to a request for Microsoft Graph data
-	useEffect(() => {
-		instance
-			.acquireTokenSilent(request)
-            // access token still valid
-			.then((response) => {
-				callMsGraphBatch(response.accessToken).then((response) => setGraphData(response.responses[4].body.value))
-			})
-            // access token invalid, request new using refresh token 
-			.catch((e) => {
-				instance.acquireTokenPopup(request).then((response) => {
-					callMsGraphBatch(response.accessToken).then((response) => setGraphData(response))
-				})
-			})
-	}, [])
-
-    console.log(graphData)
+    if (events) {
+        const sleepEvents = formatSleepEvents(events.find(query=query.id = 1))
+        const bboyEvents = formatBboyEvents(events.find(query=query.id = 2))
+        const healthEvents = formatHealthEvents(events.find(query=query.id = 3))
+        const studyEvents = formatStudyEvents(events.find(query=query.id = 4))
+        const codeEvents = formatCodeEvents(events.find(query=query.id = 5))
+        const tasks = formatTasks(events.find(query=query.id = 6))
+    }
+    
+	console.log('events: ', events)
+	// console.log('tasks: ', tasks)
 
 	return (
-        <div>
-            {/* {graphData?.map((event, i)=> (
+		<div>
+			{/* {loadingData && <div>Loading</div>} */}
+			{/* {graphData?.map((event, i)=> (
                     <div key={i}>
                         <div>{event.subject}</div>
                         <div>{event.start.dateTime}</div>
@@ -50,8 +31,8 @@ const CalEvents = () => {
                     </div>
             )
             )} */}
-        </div>
-    )
+		</div>
+	)
 }
 
 export default CalEvents
