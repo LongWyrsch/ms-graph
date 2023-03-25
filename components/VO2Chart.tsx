@@ -3,12 +3,12 @@ import React from 'react'
 import Calendar from './Calendar'
 
 
-const StrengthChart = ({ data }: CalendarChartDataProps) => {
+const VO2Chart = ({ data }: CalendarChartDataProps) => {
 	const options: google.visualization.CalendarOptions = {
-		title: 'Strength',
+		title: 'VO2',
 		height: 350,
         colorAxis: {
-            minValue: 6,
+            minValue: 0.3,
         }
 	}
 
@@ -19,4 +19,4 @@ const StrengthChart = ({ data }: CalendarChartDataProps) => {
 	)
 }
 
-export default StrengthChart
+export default VO2Chart

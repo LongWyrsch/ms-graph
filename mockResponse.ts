@@ -172,6 +172,42 @@ export const mockBathEvents = [
 						timeZone: 'UTC',
 					},
 				},
+				{
+					'@odata.etag': 'W/"BbbzqMwVoEedSATsfRywKwAGDqthfg=="',
+					id: 'AQMkADAwATNiZmYAZC1jZDUwLTFmOWItMDACLTAwCgBGAAAD6KEmf4NA006sAzSRFCKcLQcABbbzqMwVoEedSATsfRywKwAFFCckuQAAAAW286jMFaBHnUgE7H0csCsABg7OgFQAAAA=',
+					subject: '#run',
+					body: {
+						contentType: 'html',
+						content:
+							'<html>\r\n<head>\r\n<meta http-equiv="Content-Type" content="text/html; charset=utf-8">\r\n</head>\r\n<body>\r\n<div class="ContentPasted0" style="font-family:Calibri,Helvetica,sans-serif; font-size:12pt; color:rgb(0,0,0); background-color:rgb(255,255,255)">\r\n- [x] `deadlifts` &nbsp;[sets::3]\r\n<div class="ContentPasted0">- [x] `handstand traps` [sets::3]</div>\r\n<div class="ContentPasted0">- [x] `back presses Y` [sets::3]</div>\r\n<div class="ContentPasted0">- [x] `face pulls` [sets::3]</div>\r\n- [x] `rotator cuff pulls` [sets::2]<br>\r\n</div>\r\n</body>\r\n</html>\r\n',
+					},
+					start: {
+						dateTime: '2023-03-15T01:30:00.0000000',
+						timeZone: 'UTC',
+					},
+					end: {
+						dateTime: '2023-03-15T02:00:00.0000000',
+						timeZone: 'UTC',
+					},
+				},
+				{
+					'@odata.etag': 'W/"BbbzqMwVoEedSATsfRywKwAGDqthfg=="',
+					id: 'AQMkADAwATNiZmYAZC1jZDUwLTFmOWItMDACLTAwCgBGAAAD6KEmf4NA006sAzSRFCKcLQcABbbzqMwVoEedSATsfRywKwAFFCckuQAAAAW286jMFaBHnUgE7H0csCsABg7OgFQAAAA=',
+					subject: '#mobility',
+					body: {
+						contentType: 'html',
+						content:
+							'[x] `wrists clock walks`[x] `finger curls`[x] `wrist push-ups`[x] `fist knuckle push-ups`',
+					},
+					start: {
+						dateTime: '2023-03-15T01:30:00.0000000',
+						timeZone: 'UTC',
+					},
+					end: {
+						dateTime: '2023-03-15T02:00:00.0000000',
+						timeZone: 'UTC',
+					},
+				},
 			],
 		},
 	},

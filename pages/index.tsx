@@ -2,7 +2,6 @@ import { AuthenticatedTemplate, UnauthenticatedTemplate, useIsAuthenticated } fr
 import SignInButton from '../components/SignInButton'
 import SignOutButton from '../components/SignOutButton'
 import CalEvents from '@/components/CalEvents'
-import CalendarData from '@/components/CalendarData'
 
 export default function Home() {
 	const isAuthenticated = useIsAuthenticated()
