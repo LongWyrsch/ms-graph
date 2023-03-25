@@ -3,12 +3,14 @@ import { callMsGraph, callMsGraphBatch } from '@/config/graphQuery'
 import { useFetchGraphData } from '@/hooks/useFetchGraphData'
 import { CalendarChartData, FetchedEventsObj, SleepChartData } from '@/types/commonType'
 import { formatBboyEvents } from '@/utils/formatBboyEvents'
+import { formatDEUEvents } from '@/utils/formatDEUEvents'
 import { formatHealthEvents } from '@/utils/formatHealthEvents'
 import { formatSleepEvents } from '@/utils/formatSleepEvents'
 
 import { useMsal } from '@azure/msal-react'
 import React, { useEffect, useState } from 'react'
 import BboyChart from './BboyChart'
+import DEUChart from './DEUChart'
 import MobilityChart from './Mobility'
 import SleepChart from './SleepChart'
 import StrengthChart from './StrengthChart'
@@ -27,7 +29,7 @@ const CalEvents = () => {
 	let rollData: CalendarChartData | null = null
 	let neckData: CalendarChartData | null = null
 	let flossData: CalendarChartData | null = null
-	// let studyData = null
+	let DEUData: CalendarChartData | null = null
 	// let codeData = null
 	// let tasks = null
 	if (events) {
@@ -44,8 +46,8 @@ const CalEvents = () => {
 		neckData = neck
 		flossData = floss
 		
-		//      studyEvents = formatStudyEvents(events.filter((calendar: FetchedEventsObj) => calendar.id === '4')[0])
-		//      codeEvents = formatCodeEvents(events.filter((calendar: FetchedEventsObj) => calendar.id === '5')[0])
+		DEUData = formatDEUEvents(events.filter((calendar: FetchedEventsObj) => calendar.id === '4')[0])
+		//      codeData = formatCodeEvents(events.filter((calendar: FetchedEventsObj) => calendar.id === '5')[0])
 		//      tasks = formatTasks(tasks)
 	}
 
@@ -73,6 +75,7 @@ const CalEvents = () => {
 			{rollData && <MobilityChart data={rollData} title='Roll'/>}
 			{neckData && <MobilityChart data={neckData} title='Neck'/>}
 			{flossData && <MobilityChart data={flossData} title='Floss'/>}
+			{DEUData && <DEUChart data={DEUData} />}
 		</div>
 	)
 }

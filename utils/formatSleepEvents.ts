@@ -13,7 +13,7 @@ senarios
 */
 
 import { FetchedEventsObj, SleepChartData } from '@/types/commonType'
-import { dateToDay } from './dateToString'
+import { dateToDay } from './formatDates'
 
 export const formatSleepEvents = (fetchedObj: FetchedEventsObj) => {
 	const events = fetchedObj.body.value
@@ -97,7 +97,7 @@ const dateTimeToDate = (dateTimeString: string, startTime: number) => {
 	// Converting the modified Date object back to a string
 	const dateString = dateToDay(dateTime)
 
-	return dateString // "2023-03-21"
+	return dateString // "21"
 }
 
 const isWeekend = (date: Date) => {

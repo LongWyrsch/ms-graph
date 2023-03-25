@@ -17,6 +17,9 @@ export const formatHealthEvents = (fetchedObj: FetchedEventsObj) => {
 	for (const event of events) {
         const startDate = new Date(event.start.dateTime)
         const endDate = new Date(event.end.dateTime)
+        const date = startDate
+        date.setHours(0, 0, 0, 0)
+
 		const body = event.body.content.replaceAll(/&nbsp;/g, ' ')
 		if (event.subject.includes('#push')) {
 			const dipsSets = Number(body.match(/(?<=`dips`\s*\[sets::)\d+(?=\])/))
@@ -24,14 +27,14 @@ export const formatHealthEvents = (fetchedObj: FetchedEventsObj) => {
 			console.log('dipsSets: ', dipsSets)
 			console.log('pushUpsSets: ', pushUpsSets)
 			if (dipsSets >= 3 && pushUpsSets >= 3) {
-				strengthData.push([startDate, dipsSets + pushUpsSets])
+				strengthData.push([date, dipsSets + pushUpsSets])
 			}
 		} else if (event.subject.includes('#pull')) {
 			const pullUpsSets = Number(body.match(/(?<=`pull-ups`\s*\[sets::)\d+(?=\])/))
 			const bicepCurlsSets = Number(body.match(/(?<=`bicep curls`\s*\[sets::)\d+(?=\])/))
 			const invertedRowsSets = Number(body.match(/(?<=`inverted rows`\s*\[sets::)\d+(?=\])/))
 			if (pullUpsSets >= 3 && bicepCurlsSets >= 2 && invertedRowsSets >= 3) {
-				strengthData.push([startDate, pullUpsSets + bicepCurlsSets + invertedRowsSets])
+				strengthData.push([date, pullUpsSets + bicepCurlsSets + invertedRowsSets])
 			}
 		} else if (event.subject.includes('#stabilization')) {
 			const deadliftsSets = Number(body.match(/(?<=`deadlifts`\s*\[sets::)\d+(?=\])/))
@@ -39,14 +42,19 @@ export const formatHealthEvents = (fetchedObj: FetchedEventsObj) => {
 			const backPressesYSets = Number(body.match(/(?<=`back presses Y`\s*\[sets::)\d+(?=\])/))
 			const facePullsSets = Number(body.match(/(?<=`face pulls`\s*\[sets::)\d+(?=\])/))
 			if (deadliftsSets >= 3 && handstandTrapsSets >= 3 && backPressesYSets >= 3 && facePullsSets >= 3) {
-				strengthData.push([startDate, deadliftsSets + handstandTrapsSets + backPressesYSets + facePullsSets])
+				strengthData.push([date, deadliftsSets + handstandTrapsSets + backPressesYSets + facePullsSets])
 			}
 		} else if (event.subject.includes('#run') || event.subject.includes('#bike') || event.subject.includes('#swim')) {
 			const durationHours = getDurationHours(startDate, endDate)
-			if (durationHours >= 0.3) {
-				// VO2 event was longer than 20mn
-				VO2Data.push([startDate, durationHours])
-			}
+
+            // Goal of 20mn is set by min value in the calendar chart options
+            const index = VO2Data.findIndex(row => {row[0]==date})
+            if (index > -1) {
+                VO2Data[index][1] += durationHours
+            } else {
+                VO2Data.push([date, durationHours])
+            }
+			
 		} else if (event.subject.includes('#mobility')) {
                 const wristsClockWalks: number = body.match(/\[x\] `wrists clock walks`/i) ? 1 : 0
                 const fingerCurls: number = body.match(/\[x\] `finger curls`/i) ? 1 : 0
@@ -80,17 +88,17 @@ export const formatHealthEvents = (fetchedObj: FetchedEventsObj) => {
                 const medianNerve: number = body.match(/\[x\] `median nerve`/i) ? 1 : 0
                 const ulnarNerve: number = body.match(/\[x\] `ulnar nerve`/i) ? 1 : 0
                 if (wristsClockWalks || fingerCurls || wristPushUps || fistKnucklePushUps) {
-                    wristsData.push([startDate, wristsClockWalks + fingerCurls + wristPushUps + fistKnucklePushUps])
+                    wristsData.push([date, wristsClockWalks + fingerCurls + wristPushUps + fistKnucklePushUps])
                 } else if (adductors || hamstrings || powermoveStretch || quads || hipFlexors || pigeon || butterfly || glutes || sideHipStretch) {
-                    lowerBodyData.push([startDate, adductors + hamstrings + powermoveStretch + quads + hipFlexors + pigeon + butterfly + glutes + sideHipStretch])
+                    lowerBodyData.push([date, adductors + hamstrings + powermoveStretch + quads + hipFlexors + pigeon + butterfly + glutes + sideHipStretch])
                 } else if ( shoulderFlexionChair || shoulderFlexionHang || shoulderExtRotation || shoulderIntRotation || shouldersExtension) {
-                    shoulderData.push([startDate, shoulderFlexionChair + shoulderFlexionHang + shoulderExtRotation + shoulderIntRotation + shouldersExtension])
+                    shoulderData.push([date, shoulderFlexionChair + shoulderFlexionHang + shoulderExtRotation + shoulderIntRotation + shouldersExtension])
                 } else if ( quadsRoll || ITBandRoll || calvesRoll || hamstringsRoll || glutesRoll || trapsRoll) {
-                    rollData.push([startDate, quadsRoll + ITBandRoll + calvesRoll + hamstringsRoll + glutesRoll + trapsRoll])
+                    rollData.push([date, quadsRoll + ITBandRoll + calvesRoll + hamstringsRoll + glutesRoll + trapsRoll])
                 } else if ( neckStrengthening || neckStretchSides || neckStretchDoor) {
-                    neckData.push([startDate, neckStrengthening + neckStretchSides + neckStretchDoor])
+                    neckData.push([date, neckStrengthening + neckStretchSides + neckStretchDoor])
                 } else if ( hamstringsFloss ||radialNerve || medianNerve || ulnarNerve ) {
-                    flossData.push([startDate, hamstringsFloss + radialNerve + medianNerve + ulnarNerve ])
+                    flossData.push([date, hamstringsFloss + radialNerve + medianNerve + ulnarNerve ])
                 }
 		}
 	}
