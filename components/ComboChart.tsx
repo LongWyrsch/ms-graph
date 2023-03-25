@@ -1,13 +1,15 @@
+import { SleepChartData } from '@/types/commonType'
 import React, { useEffect, useRef } from 'react'
 
-interface BarChartProps {
-	data: Array<[string, number]>
-	options: google.visualization.BarChartOptions
+interface ComboChartProps {
+	data: SleepChartData
+	options: google.visualization.ComboChartOptions
 }
 
-const BarChart: React.FC<BarChartProps> = ({ data, options }) => {
+const ComboChart: React.FC<ComboChartProps> = ({ data, options }) => {
 	const chartRef = useRef<HTMLDivElement>(null)
 
+	
 	useEffect(() => {
 		if (typeof window !== 'undefined' && window.google) {
 			// Load the Google Charts library and the specific chart type
@@ -22,17 +24,14 @@ const BarChart: React.FC<BarChartProps> = ({ data, options }) => {
 		if (!chartRef.current) return
 
 		// Create a new DataTable and add columns and rows
-		const dataTable = new window.google.visualization.DataTable()
-		dataTable.addColumn('string', 'Category')
-		dataTable.addColumn('number', 'Value')
-		dataTable.addRows(data)
+		var chartData = google.visualization.arrayToDataTable(data)
 
 		// Create and draw the chart
-		const chart = new window.google.visualization.BarChart(chartRef.current)
-		chart.draw(dataTable, options)
+		const chart = new window.google.visualization.ComboChart(chartRef.current)
+		chart.draw(chartData, options)
 	}
 
 	return <div ref={chartRef}></div>
 }
 
-export default BarChart
+export default ComboChart
