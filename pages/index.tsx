@@ -19,7 +19,6 @@ export default function Home() {
 				<p>You are not signed in! Please sign in.</p>
 			</UnauthenticatedTemplate>
 			
-			<CalendarData/>
 		</div>
 	)
 }

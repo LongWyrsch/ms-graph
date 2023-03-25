@@ -1,6 +1,7 @@
 export interface FetchedEvents {
     body: {
         contentType: string 
+        content: string
     }
     end: {
         dateTime: string
@@ -24,6 +25,11 @@ export interface FetchedEventsObj {
 
 export type BatchResponse = FetchedEventsObj[]
 
+export type CalendarChartDataProps = {
+	data: CalendarChartData
+}
+
+
 export type SleepChartData  = Array<[string, number|string|null, number|string|null, number|string|null, number|string|null, number|string|null, number|string|null]>
 
 export interface Task {
@@ -35,6 +41,6 @@ export interface Task {
         }
 }
 
-export type BboyChartData = Array<[Date, number]>
+export type CalendarChartData = Array<[Date, number]>
 
 

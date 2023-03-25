@@ -1,4 +1,4 @@
-import { BboyChartData, FetchedEventsObj, SleepChartData } from '@/types/commonType'
+import { CalendarChartData, FetchedEventsObj } from '@/types/commonType'
 
 export const formatBboyEvents = (fetchedObj: FetchedEventsObj) => {
 	const events = fetchedObj.body.value
@@ -8,7 +8,7 @@ export const formatBboyEvents = (fetchedObj: FetchedEventsObj) => {
     push a new array with the date and number of hours trained
     */
 
-	let bboyData: BboyChartData = []
+	let bboyData: CalendarChartData = []
 	for (const event of events) {
 		const startDate = new Date(event.start.dateTime)
 		const endDate = new Date(event.end.dateTime)

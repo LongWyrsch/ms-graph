@@ -32,7 +32,7 @@ export const formatSleepEvents = (fetchedObj: FetchedEventsObj) => {
 		// Iterate through each day of the current month
 		for (let day = firstDayOfMonth; day < firstDayOfNextMonth; day.setDate(day.getDate() + 1)) {
 			const date = dateToDay(day)
-			const weekendMark = isWeekend(date) ? 0 : null
+			const weekendMark = isWeekend(day) ? 0 : null
 			sleepData.push([date, null, null, null, null, 8, weekendMark])
 		}
 	// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
@@ -100,8 +100,7 @@ const dateTimeToDate = (dateTimeString: string, startTime: number) => {
 	return dateString // "2023-03-21"
 }
 
-const isWeekend = (dateString: string) => {
-	const date = new Date(dateString)
+const isWeekend = (date: Date) => {
 	const dayOfWeek = date.getDay()
 	return dayOfWeek === 0 || dayOfWeek === 6
 }

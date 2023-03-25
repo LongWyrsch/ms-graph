@@ -3,10 +3,9 @@ import React from 'react'
 import Calendar from './Calendar'
 
 
-
-const BboyChart = ({ data }: CalendarChartDataProps) => {
+const StrengthChart = ({ data }: CalendarChartDataProps) => {
 	const options: google.visualization.CalendarOptions = {
-		title: 'Bboying',
+		title: 'Strength',
 		height: 350,
         colorAxis: {
             minValue: 0,
@@ -21,4 +20,4 @@ const BboyChart = ({ data }: CalendarChartDataProps) => {
 	)
 }
 
-export default BboyChart
+export default StrengthChart

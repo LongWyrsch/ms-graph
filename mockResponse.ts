@@ -125,7 +125,7 @@ export const mockBathEvents = [
 					body: {
 						contentType: 'html',
 						content:
-							'<html>\r\n<head>\r\n<meta http-equiv="Content-Type" content="text/html; charset=utf-8">\r\n</head>\r\n<body>\r\n<div class="ContentPasted0" style="font-family:Calibri,Helvetica,sans-serif; font-size:12pt; color:rgb(0,0,0); background-color:rgb(255,255,255)">\r\n- [x] `push-ups` [sets::4]\r\n<div class="ContentPasted0">- [x] `handstand push-ups` [sets::3]</div>\r\n- [x] `triceps extensions` [sets::3]<br>\r\n</div>\r\n</body>\r\n</html>\r\n',
+							'<html>\r\n<head>\r\n<meta http-equiv="Content-Type" content="text/html; charset=utf-8">\r\n</head>\r\n<body>\r\n<div class="ContentPasted0" style="font-family:Calibri,Helvetica,sans-serif; font-size:12pt; color:rgb(0,0,0); background-color:rgb(255,255,255)">\r\n- [x] `dips` [sets::3]\r\n<div class="ContentPasted0">- [x] `push-ups` [sets::3]</div>\r\n- [x] `triceps extensions` [sets::3]<br>\r\n</div>\r\n</body>\r\n</html>\r\n',
 					},
 					start: {
 						dateTime: '2023-03-23T03:30:00.0000000',
@@ -143,14 +143,32 @@ export const mockBathEvents = [
 					body: {
 						contentType: 'html',
 						content:
-							'<html>\r\n<head>\r\n<meta http-equiv="Content-Type" content="text/html; charset=utf-8">\r\n</head>\r\n<body>\r\n<div class="ContentPasted0" style="font-family:Calibri,Helvetica,sans-serif; font-size:12pt; color:rgb(0,0,0); background-color:rgb(255,255,255)">\r\n- [x] `pull-ups` &nbsp;[sets::3]\r\n<div class="ContentPasted0">- [x] `inverted rows` [sets::3]</div>\r\n<div class="ContentPasted0">- [x] `back presses I` [sets::2]</div>\r\n<div class="ContentPasted0">- [x] `back presses Y` [sets::2]</div>\r\n- [x] `rotator cuff pulls` [sets::2]<br>\r\n</div>\r\n</body>\r\n</html>\r\n',
+							'<html>\r\n<head>\r\n<meta http-equiv="Content-Type" content="text/html; charset=utf-8">\r\n</head>\r\n<body>\r\n<div class="ContentPasted0" style="font-family:Calibri,Helvetica,sans-serif; font-size:12pt; color:rgb(0,0,0); background-color:rgb(255,255,255)">\r\n- [x] `pull-ups` &nbsp;[sets::3]\r\n<div class="ContentPasted0">- [x] `inverted rows` [sets::3]</div>\r\n<div class="ContentPasted0">- [x] `bicep curls` [sets::2]</div>\r\n<div class="ContentPasted0">- [x] `back presses Y` [sets::2]</div>\r\n- [x] `rotator cuff pulls` [sets::2]<br>\r\n</div>\r\n</body>\r\n</html>\r\n',
 					},
 					start: {
-						dateTime: '2023-03-23T01:30:00.0000000',
+						dateTime: '2023-03-24T01:30:00.0000000',
 						timeZone: 'UTC',
 					},
 					end: {
-						dateTime: '2023-03-23T03:30:00.0000000',
+						dateTime: '2023-03-24T03:30:00.0000000',
+						timeZone: 'UTC',
+					},
+				},
+				{
+					'@odata.etag': 'W/"BbbzqMwVoEedSATsfRywKwAGDqthfg=="',
+					id: 'AQMkADAwATNiZmYAZC1jZDUwLTFmOWItMDACLTAwCgBGAAAD6KEmf4NA006sAzSRFCKcLQcABbbzqMwVoEedSATsfRywKwAFFCckuQAAAAW286jMFaBHnUgE7H0csCsABg7OgFQAAAA=',
+					subject: '#stabilization',
+					body: {
+						contentType: 'html',
+						content:
+							'<html>\r\n<head>\r\n<meta http-equiv="Content-Type" content="text/html; charset=utf-8">\r\n</head>\r\n<body>\r\n<div class="ContentPasted0" style="font-family:Calibri,Helvetica,sans-serif; font-size:12pt; color:rgb(0,0,0); background-color:rgb(255,255,255)">\r\n- [x] `deadlifts` &nbsp;[sets::3]\r\n<div class="ContentPasted0">- [x] `handstand traps` [sets::3]</div>\r\n<div class="ContentPasted0">- [x] `back presses Y` [sets::3]</div>\r\n<div class="ContentPasted0">- [x] `face pulls` [sets::3]</div>\r\n- [x] `rotator cuff pulls` [sets::2]<br>\r\n</div>\r\n</body>\r\n</html>\r\n',
+					},
+					start: {
+						dateTime: '2023-03-25T01:30:00.0000000',
+						timeZone: 'UTC',
+					},
+					end: {
+						dateTime: '2023-03-25T03:30:00.0000000',
 						timeZone: 'UTC',
 					},
 				},
