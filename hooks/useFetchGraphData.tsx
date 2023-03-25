@@ -65,6 +65,5 @@ export const useFetchGraphData = () => {
 	}, [])
 
 
-	console.log('Fetching data!!!')
 	return {events, tasks}
 }

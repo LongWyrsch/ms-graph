@@ -24,7 +24,7 @@ export interface FetchedEventsObj {
 
 export type BatchResponse = FetchedEventsObj[]
 
-export type SleepChartData  = Array<[string, number|string, number|string, number|string, number|string]>
+export type SleepChartData  = Array<[string, number|string|null, number|string|null, number|string|null, number|string|null, number|string|null, number|string|null]>
 
 export interface Task {
         status: string
@@ -35,6 +35,6 @@ export interface Task {
         }
 }
 
-
+export type BboyChartData = Array<[Date, number]>
 
 

@@ -9,7 +9,24 @@ export const mockBathEvents = [
 		body: {
 			'@odata.context':
 				"https://graph.microsoft.com/v1.0/$metadata#users('long.nqw%40outlook.com')/calendars('AQMkADAwATNiZmYAZC1jZDUwLTFmOWItMDACLTAwCgBGAAAD6KEmf4NA006sAzSRFCKcLQcABbbzqMwVoEedSATsfRywKwAAAgEGAAAABbbzqMwVoEedSATsfRywKwAFFCh3zQAAAA%3D%3D')/events(subject,body,start,end)",
-			value: [],
+			value: [
+				{
+					id: 'AQMkADAwATNiZmYAZC1jZDUwLTFmOWItMDACLTAwCgBGAAAD6KEmf4NA006sAzSRFCKcLQcABbbzqMwVoEedSATsfRywKwAFFCckuAAAAAW286jMFaBHnUgE7H0csCsABhAcUToAAAA=',
+					subject: '#bboy Icklack',
+					body: {
+						contentType: 'html',
+						content: '',
+					},
+					start: {
+						dateTime: '2023-03-20T07:30:00.0000000',
+						timeZone: 'UTC',
+					},
+					end: {
+						dateTime: '2023-03-20T09:30:00.0000000',
+						timeZone: 'UTC',
+					},
+				},
+			],
 		},
 	},
 	{

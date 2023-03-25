@@ -26,6 +26,7 @@ const ComboChart: React.FC<ComboChartProps> = ({ data, options }) => {
 		// Create a new DataTable and add columns and rows
 		var chartData = google.visualization.arrayToDataTable(data)
 
+
 		// Create and draw the chart
 		const chart = new window.google.visualization.ComboChart(chartRef.current)
 		chart.draw(chartData, options)
