@@ -24,8 +24,6 @@ export const formatHealthEvents = (fetchedObj: FetchedEventsObj) => {
 		if (event.subject.includes('#push')) {
 			const dipsSets = Number(body.match(/(?<=`dips`\s*\[sets::)\d+(?=\])/))
 			const pushUpsSets = Number(body.match(/(?<=`push-ups`\s*\[sets::)\d+(?=\])/))
-			console.log('dipsSets: ', dipsSets)
-			console.log('pushUpsSets: ', pushUpsSets)
 			if (dipsSets >= 3 && pushUpsSets >= 3) {
 				strengthData.push([date, dipsSets + pushUpsSets])
 			}

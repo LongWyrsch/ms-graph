@@ -40,11 +40,13 @@ export const formatSleepEvents = (fetchedObj: FetchedEventsObj) => {
 	for (const event of events) {
 		if (event.subject.toLowerCase() !== '#sleep') continue
 
-		// Adjust time for my local time zone. The Graph data is at UTC 0. Need to shift according to my location.
-		const timezoneOffset = (currentDate.getTimezoneOffset() / 60) * -1
-
+		// Adjust time for local time zone of the event. The Graph data is at UTC 0. Need to shift according to event location and time (summer and winter can have different timezones).
+		const date = new Date(event.start.dateTime)
+		const timezoneOffset = (date.getTimezoneOffset() / 60) * -1
+		
 		const startTime = dateTimeToHour(event.start.dateTime) + timezoneOffset
 		const endTime = dateTimeToHour(event.end.dateTime) + timezoneOffset
+		
 
 		let block1 = 0
 		let block2 = 0

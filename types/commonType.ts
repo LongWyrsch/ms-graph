@@ -32,6 +32,8 @@ export type CalendarChartDataProps = {
 
 export type SleepChartData  = Array<[string, number|string|null, number|string|null, number|string|null, number|string|null, number|string|null, number|string|null]>
 
+export type CalendarChartData = Array<[Date, number]>
+
 export interface Task {
         status: string
         title: string
@@ -41,6 +43,7 @@ export interface Task {
         }
 }
 
-export type CalendarChartData = Array<[Date, number]>
+export type FetchedTasksObj = Task[]
 
 
+export type NutritionChartData = Array<[Date, string, string, string, string, string]>

@@ -1,10 +1,11 @@
 import { loginRequest } from '@/config/authConfig'
 import { callMsGraph, callMsGraphBatch } from '@/config/graphQuery'
 import { useFetchGraphData } from '@/hooks/useFetchGraphData'
-import { CalendarChartData, FetchedEventsObj, SleepChartData } from '@/types/commonType'
+import { CalendarChartData, FetchedEventsObj, NutritionChartData, SleepChartData } from '@/types/commonType'
 import { formatBboyEvents } from '@/utils/formatBboyEvents'
 import { formatDEUEvents } from '@/utils/formatDEUEvents'
 import { formatHealthEvents } from '@/utils/formatHealthEvents'
+import { formatNutrition } from '@/utils/formatNutrition'
 import { formatSleepEvents } from '@/utils/formatSleepEvents'
 
 import { useMsal } from '@azure/msal-react'
@@ -12,14 +13,17 @@ import React, { useEffect, useState } from 'react'
 import BboyChart from './BboyChart'
 import DEUChart from './DEUChart'
 import MobilityChart from './Mobility'
+import NutritionChart from './NutritionChart'
 import SleepChart from './SleepChart'
 import StrengthChart from './StrengthChart'
+import TableChart from './TableChart'
 import VO2Chart from './VO2Chart'
 
 const CalEvents = () => {
 	const { events, tasks } = useFetchGraphData()
 
 	let sleepData: SleepChartData | null = null
+	let nutritionData: NutritionChartData | null = null
 	let bboyData: CalendarChartData | null = null
 	let strengthData: CalendarChartData | null = null
 	let VO2Data: CalendarChartData | null = null
@@ -48,7 +52,10 @@ const CalEvents = () => {
 		
 		DEUData = formatDEUEvents(events.filter((calendar: FetchedEventsObj) => calendar.id === '4')[0])
 		//      codeData = formatCodeEvents(events.filter((calendar: FetchedEventsObj) => calendar.id === '5')[0])
-		//      tasks = formatTasks(tasks)
+	}
+
+	if (tasks) {
+		nutritionData = formatNutrition(tasks)
 	}
 
 	console.log('events: ', events)
@@ -66,7 +73,8 @@ const CalEvents = () => {
             )
             )} */}
 			{sleepData && <SleepChart data={sleepData} />}
-			{bboyData && <BboyChart data={bboyData} />}
+			{nutritionData && <NutritionChart data={nutritionData} />}
+			{DEUData && <DEUChart data={DEUData} />}
 			{strengthData && <StrengthChart data={strengthData} />}
 			{VO2Data && <VO2Chart data={VO2Data} />}
 			{wristsData && <MobilityChart data={wristsData} title='Wrists'/>}
@@ -75,7 +83,7 @@ const CalEvents = () => {
 			{rollData && <MobilityChart data={rollData} title='Roll'/>}
 			{neckData && <MobilityChart data={neckData} title='Neck'/>}
 			{flossData && <MobilityChart data={flossData} title='Floss'/>}
-			{DEUData && <DEUChart data={DEUData} />}
+			{bboyData && <BboyChart data={bboyData} />}
 		</div>
 	)
 }

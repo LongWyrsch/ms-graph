@@ -7,11 +7,19 @@ type SleepChartDataProps = {
 }
 
 const SleepChart = ({ data }: SleepChartDataProps) => {
+	const today = new Date()
+	const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+	const currentMonthName = monthNames[today.getMonth()]
 	const options: google.visualization.ComboChartOptions = {
-		title: 'My Sleep Chart',
-		vAxis: { title: 'hours' },
+		title: 'Sleep',
+		vAxis: { 
+			title: 'hours', 
+			gridlines: {
+				color: 'transparent',
+			},
+		},
 		hAxis: {
-			title: 'day',
+			title: currentMonthName,
 			textStyle: {
 				fontSize: 8,
 			},
@@ -23,7 +31,9 @@ const SleepChart = ({ data }: SleepChartDataProps) => {
 			1: { color: 'transparent', fillOpacity: 0 },
 			2: { color: '#3d66ad' },
 			3: { type: 'line', color: '#00996e' },
-			4: { type: 'line' },
+			4: {
+				type: 'line',
+			},
 			5: {
 				type: 'line',
 				lineWidth: 0,
@@ -34,7 +44,6 @@ const SleepChart = ({ data }: SleepChartDataProps) => {
 		},
 		curveType: 'function',
 		legend: { position: 'none' },
-
 		// width: 600,
 		// height: 400,
 		// legend: { position: 'none' },
