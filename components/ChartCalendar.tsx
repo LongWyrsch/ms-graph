@@ -1,43 +1,32 @@
-import { useTheme } from '@/hooks/useTheme'
+import React, { useContext, useRef } from 'react'
+import { useLoadChart } from '@/hooks/useLoadChart'
 import { themeContext } from '@/pages'
-import React, { useContext, useEffect, useRef } from 'react'
 
 interface CalendarProps {
 	data: Array<[Date, number]>
 	options: google.visualization.CalendarOptions
 }
 
-const Calendar: React.FC<CalendarProps> = ({ data, options }) => {
+const ChartCalendar: React.FC<CalendarProps> = ({ data, options }) => {
 	const chartRef = useRef<HTMLDivElement>(null)
 	const theme = useContext(themeContext)
 
-	useEffect(() => {
-		if (typeof window !== 'undefined' && window.google) {
-			// Load the Google Charts library and the specific chart type
-			window.google.charts.load('current', { packages: ['calendar'] })
-
-			// When the library is loaded, draw the chart
-			window.google.charts.setOnLoadCallback(drawChart)
-		}
-
-
-	}, [data, options])
-
-	console.log('theme: ', theme)
-	const emptyCellBackgroundColor = theme === 'light' ? '#f7f7f7' : '#3a3a3b'
-	const cellBorder = theme === 'light' ? '#ffffff' : '#000000'
-	const cellBorderWidth = theme === 'light' ? 1 : 0.3
-	const monthSeparator = theme === 'light' ? '#e8e8e8' : '#000000'
-
 	const drawChart = () => {
 		if (!chartRef.current) return
-
+		
 		// Create a new DataTable and add columns and rows
 		const dataTable = new window.google.visualization.DataTable()
 		dataTable.addColumn({ type: 'date', id: 'Date' })
-		dataTable.addColumn({ type: 'number', id: 'Won/Loss' })
+		dataTable.addColumn({ type: 'number', id: 'Value' })
 		dataTable.addRows(data)
 
+		// Set up colors depending on theme
+		const emptyCellBackgroundColor = theme === 'light' ? '#f7f7f7' : '#3a3a3b'
+		const cellBorder = theme === 'light' ? '#ffffff' : '#000000'
+		const cellBorderWidth = theme === 'light' ? 1 : 0.3
+		const monthSeparator = theme === 'light' ? '#e8e8e8' : '#000000'
+
+		// Set chart options common to all
 		const globalOptions = {
 			calendar: {
 				cellSize: 13,
@@ -62,7 +51,9 @@ const Calendar: React.FC<CalendarProps> = ({ data, options }) => {
 		chart.draw(dataTable, globalOptions)
 	}
 
+	useLoadChart(drawChart, data, options, 'calendar')
+
 	return <div ref={chartRef}></div>
 }
 
-export default Calendar
+export default ChartCalendar

@@ -1,18 +1,5 @@
-/*
-COMBO chart expected data
-[
-    ['Time blocks', 'Sleep before midnight', 'Awake after midnight', 'Sleep after midnight', { role: 'annotation' } ],
-    ['22/03', 1, 0, 7, ''],
-    ...
-]
-
-senarios
-    1 ex: 11pm-6am
-    2 ex: 0-7am 
-    3 ex: 1am-8am
-*/
-
 import { FetchedEventsObj, SleepChartData } from '@/types/commonType'
+import { firstAndLastDayOfMonth } from './firstAndLastDayOfMonth'
 import { dateToDay } from './formatDates'
 
 export const formatSleepEvents = (fetchedObj: FetchedEventsObj) => {
@@ -21,56 +8,55 @@ export const formatSleepEvents = (fetchedObj: FetchedEventsObj) => {
 
 	let sleepData: SleepChartData = [['date', 'block1', 'block2', 'block3', 'total', 'goal', 'weekend']]
 
-	// populate sleepData with empty values for every day of current month
-	// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
-		const currentDate = new Date()
-		const currentMonth = currentDate.getMonth()
-		const currentYear = currentDate.getFullYear()
-		const firstDayOfMonth = new Date(currentYear, currentMonth, 1) // Get the first day of the current month
-		const firstDayOfNextMonth = new Date(currentYear, currentMonth + 1, 1) // Get the first day of the next month
+	// ~ ~ ~ ~ ~ ~ ~ ~ populate sleepData with empty values for every day of current month ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+	const {firstDayOfMonth, firstDayOfNextMonth} = firstAndLastDayOfMonth()
 
-		// Iterate through each day of the current month
-		for (let day = firstDayOfMonth; day < firstDayOfNextMonth; day.setDate(day.getDate() + 1)) {
-			const date = dateToDay(day)
-			const weekendMark = isWeekend(day) ? 0 : null
-			sleepData.push([date, null, null, null, null, 8, weekendMark])
-		}
+	// Iterate through each day of the current month
+	for (let day = firstDayOfMonth; day < firstDayOfNextMonth; day.setDate(day.getDate() + 1)) {
+		const date = dateToDay(day)
+
+		// One series is just to mark the weekend. Create a mark at 0 on the X axis.
+		const weekendMark = isWeekend(day) ? 0 : null
+		sleepData.push([date, null, null, null, null, 8, weekendMark])
+	}
 	// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
 
-	for (const event of events) {
-		if (event.subject.toLowerCase() !== '#sleep') continue
+	if (events && events.length > 0) {
+		for (const event of events) {
+			if (event.subject.toLowerCase() !== '#sleep') continue
 
-		// Adjust time for local time zone of the event. The Graph data is at UTC 0. Need to shift according to event location and time (summer and winter can have different timezones).
-		const date = new Date(event.start.dateTime)
-		const timezoneOffset = (date.getTimezoneOffset() / 60) * -1
-		
-		const startTime = dateTimeToHour(event.start.dateTime) + timezoneOffset
-		const endTime = dateTimeToHour(event.end.dateTime) + timezoneOffset
-		
+			// Adjust time for local time zone of the event. The Graph data is at UTC 0. Need to shift according to event location and time (summer and winter can have different timezones).
+			const date = new Date(event.start.dateTime)
+			const timezoneOffset = (date.getTimezoneOffset() / 60) * -1
+			
+			const startTime = dateTimeToHour(event.start.dateTime) + timezoneOffset
+			const endTime = dateTimeToHour(event.end.dateTime) + timezoneOffset
+			
 
-		let block1 = null
-		let block2 = null
-		let block3 = null
-		let total = 0
-		if (startTime > 18 && endTime < 12) {
-			block1 = (24 - startTime) * -1
-			block3 = endTime
-			total = block1 + block3
-		} else if (startTime >= 0 && startTime < 12 && endTime < 12) {
-			block2 = startTime
-			block3 = endTime - startTime
-			total = block3
-		}
+			let block1 = null
+			let block2 = null
+			let block3 = null
+			let total = 0
+			if (startTime > 18 && endTime < 12) {
+				block1 = (24 - startTime) * -1
+				block3 = endTime
+				total = block1 + block3
+			} else if (startTime >= 0 && startTime < 12 && endTime < 12) {
+				block2 = startTime
+				block3 = endTime - startTime
+				total = block3
+			}
 
-		const sleepDate = dateTimeToDate(event.start.dateTime, startTime)
+			const sleepDate = dateTimeToDate(event.start.dateTime, startTime)
 
-		const index = sleepData.findIndex((arr) => arr[0] == sleepDate)
-		if (index !== -1) {
-			// sleepData[index][0] = sleepDate
-			sleepData[index][1] = block1
-			sleepData[index][2] = block2
-			sleepData[index][3] = block3
-			sleepData[index][4] = total
+			const index = sleepData.findIndex((arr) => arr[0] == sleepDate)
+			if (index !== -1) {
+				// sleepData[index][0] = sleepDate
+				sleepData[index][1] = block1
+				sleepData[index][2] = block2
+				sleepData[index][3] = block3
+				sleepData[index][4] = total
+			}
 		}
 	}
 

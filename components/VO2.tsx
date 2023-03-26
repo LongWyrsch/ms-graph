@@ -4,23 +4,17 @@ import { useCalendarColors } from '@/hooks/useCalendarColors'
 import React, { useContext } from 'react'
 import Calendar from './ChartCalendar'
 
-type MobilityChartDataProps = CalendarChartDataProps & { title: string }
-
-const MobilityChart = ({ data, title }: MobilityChartDataProps) => {
+const VO2 = ({ data }: CalendarChartDataProps) => {
 	// Get colors common to all calendar charts
 	const { calendarBackgroundColor, today } = useCalendarColors()
 
 	const options: google.visualization.CalendarOptions = {
-		title: title,
+		title: 'VO2',
 		colorAxis: {
 			colors: [today, calendarBackgroundColor, '#ff9933', '#cc6600'],
-			values: [-1, 0, 4, 9],
+			values: [-1, 0, 0.3, 1],
 		},
 		// height: 350,
-		// noDataPattern: {
-		// 	backgroundColor: 'lightGray',
-		// 	color: 'lightGray',
-		// },
 	}
 
 	return (
@@ -30,4 +24,4 @@ const MobilityChart = ({ data, title }: MobilityChartDataProps) => {
 	)
 }
 
-export default MobilityChart
+export default VO2

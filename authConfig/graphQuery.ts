@@ -70,3 +70,7 @@ const batchQuery = {
 		// },
 	],
 }
+
+
+// For some reason, I got a lot of throttleing when addind the tasks to the batch request. So I am making a second request just for the tasks.
+// Need to double check if it really improves the throtteling situation.

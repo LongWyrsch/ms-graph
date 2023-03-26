@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import ComboChart from './ComboChart'
+import ComboChart from './ChartCombo'
 import { SleepChartData } from '@/types/commonType'
 import { themeContext } from '@/pages'
 
@@ -7,20 +7,26 @@ type SleepChartDataProps = {
 	data: SleepChartData
 }
 
-
-const SleepChart = ({ data }: SleepChartDataProps) => {
+const Sleep = ({ data }: SleepChartDataProps) => {
 	const theme = useContext(themeContext)
 
-	const backgroundColor = theme==='light'? '#ffffff' : '#222222'
-	const highContrast = theme==='light'? 'black' : 'white'
-
+	// Get current month to display under X axis.
 	const today = new Date()
 	const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 	const currentMonthName = monthNames[today.getMonth()]
+	
+	// Set colors based on theme	
+	const backgroundColor = theme==='light'? '#ffffff' : '#222222'
+	const highContrast = theme==='light'? 'black' : 'white'
+
+	// Define chart options
 	const options: google.visualization.ComboChartOptions = {
 		title: 'Sleep',
 		// chartArea: {left: '10%', top: 0, width: '80%', height: '100%'},
-		titleTextStyle: {color: highContrast},
+		titleTextStyle: {
+			color: highContrast,
+			fontSize: 25
+		},
 		backgroundColor: backgroundColor,
 		// chartArea: {backgroundColor: chartAreaBackgroundColor},
 		animation: {
@@ -75,4 +81,4 @@ const SleepChart = ({ data }: SleepChartDataProps) => {
 	)
 }
 
-export default SleepChart
+export default Sleep

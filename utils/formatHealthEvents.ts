@@ -5,55 +5,61 @@ import { getDurationHours } from './getDurationHours'
 export const formatHealthEvents = (fetchedObj: FetchedEventsObj) => {
 	const events = fetchedObj.body.value
 
-	let strengthData: CalendarChartData = []
-	let VO2Data: CalendarChartData = []
-	let wristsData: CalendarChartData = []
-	let lowerBodyData: CalendarChartData = []
-	let shoulderData: CalendarChartData = []
-	let rollData: CalendarChartData = []
-	let neckData: CalendarChartData = []
-	let flossData: CalendarChartData = []
+    // Create data array and add a row for today, so that the calendar shows today's cell
+	let strengthData: CalendarChartData = [[new Date(), -1]]
+	let VO2Data: CalendarChartData = [[new Date(), -1]]
+	let wristsData: CalendarChartData = [[new Date(), -1]]
+	let lowerBodyData: CalendarChartData = [[new Date(), -1]]
+	let shoulderData: CalendarChartData = [[new Date(), -1]]
+	let rollData: CalendarChartData = [[new Date(), -1]]
+	let neckData: CalendarChartData = [[new Date(), -1]]
+	let flossData: CalendarChartData = [[new Date(), -1]]
 
-	for (const event of events) {
-        const startDate = new Date(event.start.dateTime)
-        const endDate = new Date(event.end.dateTime)
-        const date = startDate
-        date.setHours(0, 0, 0, 0)
+	if (events && events.length > 0) {
+        for (const event of events) {
+            const startDate = new Date(event.start.dateTime)
+            const endDate = new Date(event.end.dateTime)
+            const durationHours = getDurationHours(startDate, endDate)
+            const date = startDate
+            date.setHours(0, 0, 0, 0)
+            
+            const body = event.body.content.replaceAll(/&nbsp;/g, ' ')
 
-		const body = event.body.content.replaceAll(/&nbsp;/g, ' ')
-		if (event.subject.includes('#push')) {
-			const dipsSets = Number(body.match(/(?<=`dips`\s*\[sets::)\d+(?=\])/))
-			const pushUpsSets = Number(body.match(/(?<=`push-ups`\s*\[sets::)\d+(?=\])/))
-			if (dipsSets >= 3 && pushUpsSets >= 3) {
-				strengthData.push([date, dipsSets + pushUpsSets])
-			}
-		} else if (event.subject.includes('#pull')) {
-			const pullUpsSets = Number(body.match(/(?<=`pull-ups`\s*\[sets::)\d+(?=\])/))
-			const bicepCurlsSets = Number(body.match(/(?<=`bicep curls`\s*\[sets::)\d+(?=\])/))
-			const invertedRowsSets = Number(body.match(/(?<=`inverted rows`\s*\[sets::)\d+(?=\])/))
-			if (pullUpsSets >= 3 && bicepCurlsSets >= 2 && invertedRowsSets >= 3) {
-				strengthData.push([date, pullUpsSets + bicepCurlsSets + invertedRowsSets])
-			}
-		} else if (event.subject.includes('#stabilization')) {
-			const deadliftsSets = Number(body.match(/(?<=`deadlifts`\s*\[sets::)\d+(?=\])/))
-			const handstandTrapsSets = Number(body.match(/(?<=`handstand traps`\s*\[sets::)\d+(?=\])/))
-			const backPressesYSets = Number(body.match(/(?<=`back presses Y`\s*\[sets::)\d+(?=\])/))
-			const facePullsSets = Number(body.match(/(?<=`face pulls`\s*\[sets::)\d+(?=\])/))
-			if (deadliftsSets >= 3 && handstandTrapsSets >= 3 && backPressesYSets >= 3 && facePullsSets >= 3) {
-				strengthData.push([date, deadliftsSets + handstandTrapsSets + backPressesYSets + facePullsSets])
-			}
-		} else if (event.subject.includes('#run') || event.subject.includes('#bike') || event.subject.includes('#swim')) {
-			const durationHours = getDurationHours(startDate, endDate)
-
-            // Goal of 20mn is set by min value in the calendar chart options
-            const index = VO2Data.findIndex(row => {row[0]==date})
-            if (index > -1) {
-                VO2Data[index][1] += durationHours
-            } else {
-                VO2Data.push([date, durationHours])
-            }
-			
-		} else if (event.subject.includes('#mobility')) {
+            // ~~~~~~~~~~~~~~~~~~~~~~~~~~ STRENGTH ~~~~~~~~~~~~~~~~~~~~~~~~~~
+            if (event.subject.includes('#push')) {
+                const dipsSets = Number(body.match(/(?<=`dips`\s*\[sets::)\d+(?=\])/))
+                const pushUpsSets = Number(body.match(/(?<=`push-ups`\s*\[sets::)\d+(?=\])/))
+                if (dipsSets >= 3 && pushUpsSets >= 3) {
+                    strengthData.push([date, dipsSets + pushUpsSets])
+                }
+            } else if (event.subject.includes('#pull')) {
+                const pullUpsSets = Number(body.match(/(?<=`pull-ups`\s*\[sets::)\d+(?=\])/))
+                const bicepCurlsSets = Number(body.match(/(?<=`bicep curls`\s*\[sets::)\d+(?=\])/))
+                const invertedRowsSets = Number(body.match(/(?<=`inverted rows`\s*\[sets::)\d+(?=\])/))
+                if (pullUpsSets >= 3 && bicepCurlsSets >= 2 && invertedRowsSets >= 3) {
+                    strengthData.push([date, pullUpsSets + bicepCurlsSets + invertedRowsSets])
+                }
+            } else if (event.subject.includes('#stabilization')) {
+                const deadliftsSets = Number(body.match(/(?<=`deadlifts`\s*\[sets::)\d+(?=\])/))
+                const handstandTrapsSets = Number(body.match(/(?<=`handstand traps`\s*\[sets::)\d+(?=\])/))
+                const backPressesYSets = Number(body.match(/(?<=`back presses Y`\s*\[sets::)\d+(?=\])/))
+                const facePullsSets = Number(body.match(/(?<=`face pulls`\s*\[sets::)\d+(?=\])/))
+                if (deadliftsSets >= 3 && handstandTrapsSets >= 3 && backPressesYSets >= 3 && facePullsSets >= 3) {
+                    strengthData.push([date, deadliftsSets + handstandTrapsSets + backPressesYSets + facePullsSets])
+                }
+            // ~~~~~~~~~~~~~~~~~~~~~~~~~~ VO2 ~~~~~~~~~~~~~~~~~~~~~~~~~~
+            } else if (event.subject.includes('#run') || event.subject.includes('#bike') || event.subject.includes('#swim')) {
+                const durationHours = getDurationHours(startDate, endDate)
+                
+                // Goal of 20mn is set by min value in the calendar chart options
+                const index = VO2Data.findIndex(row => {row[0]==date})
+                if (index > -1) {
+                    VO2Data[index][1] += durationHours
+                } else {
+                    VO2Data.push([date, durationHours])
+                }
+            // ~~~~~~~~~~~~~~~~~~~~~~~~~~ MOBILITY ~~~~~~~~~~~~~~~~~~~~~~~~~~
+            } else if (event.subject.includes('#mobility')) {
                 const wristsClockWalks: number = body.match(/\[x\] `wrists clock walks`/i) ? 1 : 0
                 const fingerCurls: number = body.match(/\[x\] `finger curls`/i) ? 1 : 0
                 const wristPushUps: number = body.match(/\[x\] `wrist push-ups`/i) ? 1 : 0
@@ -86,20 +92,27 @@ export const formatHealthEvents = (fetchedObj: FetchedEventsObj) => {
                 const medianNerve: number = body.match(/\[x\] `median nerve`/i) ? 1 : 0
                 const ulnarNerve: number = body.match(/\[x\] `ulnar nerve`/i) ? 1 : 0
                 if (wristsClockWalks || fingerCurls || wristPushUps || fistKnucklePushUps) {
+                    // WRISTS => do all daily
                     wristsData.push([date, wristsClockWalks + fingerCurls + wristPushUps + fistKnucklePushUps])
                 } else if (adductors || hamstrings || powermoveStretch || quads || hipFlexors || pigeon || butterfly || glutes || sideHipStretch) {
+                    // LOWER BODY => do all daily
                     lowerBodyData.push([date, adductors + hamstrings + powermoveStretch + quads + hipFlexors + pigeon + butterfly + glutes + sideHipStretch])
                 } else if ( shoulderFlexionChair || shoulderFlexionHang || shoulderExtRotation || shoulderIntRotation || shouldersExtension) {
+                    // SHOULDERS => do all daily
                     shoulderData.push([date, shoulderFlexionChair + shoulderFlexionHang + shoulderExtRotation + shoulderIntRotation + shouldersExtension])
                 } else if ( quadsRoll || ITBandRoll || calvesRoll || hamstringsRoll || glutesRoll || trapsRoll) {
-                    rollData.push([date, quadsRoll + ITBandRoll + calvesRoll + hamstringsRoll + glutesRoll + trapsRoll])
+                    // ROLL => 30mn daily
+                    rollData.push([date, durationHours])
                 } else if ( neckStrengthening || neckStretchSides || neckStretchDoor) {
+                    // NECK => every 3 days
                     neckData.push([date, neckStrengthening + neckStretchSides + neckStretchDoor])
                 } else if ( hamstringsFloss ||radialNerve || medianNerve || ulnarNerve ) {
+                    // FLOSS => do all daily
                     flossData.push([date, hamstringsFloss + radialNerve + medianNerve + ulnarNerve ])
                 }
-		}
-	}
+            }
+        }
+    }
 
 	return [strengthData, VO2Data, wristsData, lowerBodyData, shoulderData, rollData, neckData, flossData]
 }

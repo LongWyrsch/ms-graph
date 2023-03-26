@@ -1,24 +1,14 @@
+import React, { useRef } from 'react'
 import { SleepChartData } from '@/types/commonType'
-import React, { useEffect, useRef } from 'react'
+import { useLoadChart } from '@/hooks/useLoadChart'
 
 interface ComboChartProps {
 	data: SleepChartData
 	options: google.visualization.ComboChartOptions
 }
 
-const ComboChart: React.FC<ComboChartProps> = ({ data, options }) => {
+const ChartCombo: React.FC<ComboChartProps> = ({ data, options }) => {
 	const chartRef = useRef<HTMLDivElement>(null)
-
-	
-	useEffect(() => {
-		if (typeof window !== 'undefined' && window.google) {
-			// Load the Google Charts library and the specific chart type
-			window.google.charts.load('current', { packages: ['corechart'] })
-
-			// When the library is loaded, draw the chart
-			window.google.charts.setOnLoadCallback(drawChart)
-		}
-	}, [data, options])
 
 	const drawChart = () => {
 		if (!chartRef.current) return
@@ -32,7 +22,9 @@ const ComboChart: React.FC<ComboChartProps> = ({ data, options }) => {
 		chart.draw(chartData, options)
 	}
 
+	useLoadChart(drawChart, data, options, 'corechart')
+
 	return <div ref={chartRef}></div>
 }
 
-export default ComboChart
+export default ChartCombo

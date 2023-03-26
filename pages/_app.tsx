@@ -1,13 +1,12 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { EventType, PublicClientApplication } from '@azure/msal-browser'
-import { msalConfig } from '../config/authConfig'
+import { msalConfig } from '../authConfig/authConfig'
 import { MsalProvider } from '@azure/msal-react'
 import Head from 'next/head'
 import { useTheme } from '@/hooks/useTheme'
 
 export const msalInstance = new PublicClientApplication(msalConfig)
-
 
 export default function App({ Component, pageProps }: AppProps) {
 	return (
@@ -18,7 +17,7 @@ export default function App({ Component, pageProps }: AppProps) {
 				<link rel="icon" href="/IcBaselineEventAvailable.svg" />
 			</Head>
 			<MsalProvider instance={msalInstance}>
-					<Component {...pageProps} />
+				<Component {...pageProps} />
 			</MsalProvider>
 		</>
 	)
