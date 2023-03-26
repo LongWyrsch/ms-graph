@@ -4,6 +4,7 @@ import SignOutButton from '../components/SignOutButton'
 import CalEvents from '@/components/Dashboard'
 import { createContext, useEffect, useState } from 'react'
 import { useTheme } from '@/hooks/useTheme'
+import { hideCalendarColorLegend, hideTextElements } from '@/utils/hideElements'
 
 export const themeContext = createContext('')
 
@@ -12,8 +13,14 @@ export default function Home() {
 
 	const { theme, toggleTheme } = useTheme()
 
+
+
 	useEffect(() => {
 		document.documentElement.setAttribute('data-theme', theme)
+		setTimeout(() => {
+			hideTextElements()
+			hideCalendarColorLegend()
+		}, 200)
 	}, [theme])
 
 	return (

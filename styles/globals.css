@@ -11,12 +11,6 @@
   --text-color: #ffffff;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    
-  }
-}
-
 * {
   box-sizing: border-box;
   padding: 0;
@@ -36,16 +30,6 @@ a {
   color: inherit;
   /* text-decoration: none; */
 }
-
-/* @media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
-} */
 
 
 .chartContainer{
@@ -68,7 +52,3 @@ a {
   font-size: 0.8rem;
 }
 
-
-.gradientLegend {
-  display: none;
-}

@@ -51,7 +51,7 @@ export const formatNutrition = (tasks: FetchedTasksObj) => {
 				return row[0].getDate() == date.getDate() && row[0].getMonth() == date.getMonth()
 			})			
 			if (index > -1) {
-				nutritionData[index][col] = '✔️'				
+				nutritionData[index][col] = '✓'				
 			}
 		}
 

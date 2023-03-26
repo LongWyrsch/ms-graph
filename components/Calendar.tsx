@@ -9,7 +9,7 @@ interface CalendarProps {
 
 const Calendar: React.FC<CalendarProps> = ({ data, options }) => {
 	const chartRef = useRef<HTMLDivElement>(null)
-	const theme = useContext(themeContext)  
+	const theme = useContext(themeContext)
 
 	useEffect(() => {
 		if (typeof window !== 'undefined' && window.google) {
@@ -18,12 +18,16 @@ const Calendar: React.FC<CalendarProps> = ({ data, options }) => {
 
 			// When the library is loaded, draw the chart
 			window.google.charts.setOnLoadCallback(drawChart)
-
 		}
+
+
 	}, [data, options])
 
 	console.log('theme: ', theme)
-	const emptyCellBackgroundColor = theme==='light'? '#f7f7f7' : '#3a3a3b'
+	const emptyCellBackgroundColor = theme === 'light' ? '#f7f7f7' : '#3a3a3b'
+	const cellBorder = theme === 'light' ? '#ffffff' : '#000000'
+	const cellBorderWidth = theme === 'light' ? 1 : 0.3
+	const monthSeparator = theme === 'light' ? '#e8e8e8' : '#000000'
 
 	const drawChart = () => {
 		if (!chartRef.current) return
@@ -37,8 +41,13 @@ const Calendar: React.FC<CalendarProps> = ({ data, options }) => {
 		const globalOptions = {
 			calendar: {
 				cellSize: 13,
-				monthOutlineColor: { stroke: '#e8e8e8', strokeOpacity: 1, strokeWidth: 1 },
-				unusedMonthOutlineColor: {stroke: '#e8e8e8', strokeOpacity: 0.8, strokeWidth: 2},
+				monthOutlineColor: { stroke: monthSeparator, strokeOpacity: 1, strokeWidth: 1 },
+				unusedMonthOutlineColor: { stroke: monthSeparator, strokeOpacity: 0.8, strokeWidth: 2 },
+				cellColor: {
+					stroke: cellBorder, // Color the border of the squares.
+					// strokeOpacity: 0.5, // Make the borders half transparent.
+					strokeWidth: cellBorderWidth, // ...and two pixels thick.
+				},
 			},
 			height: 150,
 			noDataPattern: {
@@ -52,8 +61,6 @@ const Calendar: React.FC<CalendarProps> = ({ data, options }) => {
 		const chart = new window.google.visualization.Calendar(chartRef.current)
 		chart.draw(dataTable, globalOptions)
 	}
-
-	
 
 	return <div ref={chartRef}></div>
 }

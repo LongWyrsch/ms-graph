@@ -1,26 +1,38 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import ComboChart from './ComboChart'
 import { SleepChartData } from '@/types/commonType'
+import { themeContext } from '@/pages'
 
 type SleepChartDataProps = {
 	data: SleepChartData
 }
 
+
 const SleepChart = ({ data }: SleepChartDataProps) => {
+	const theme = useContext(themeContext)
+
+	const backgroundColor = theme==='light'? '#ffffff' : '#222222'
+	const highContrast = theme==='light'? 'black' : 'white'
+
 	const today = new Date()
 	const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 	const currentMonthName = monthNames[today.getMonth()]
 	const options: google.visualization.ComboChartOptions = {
 		title: 'Sleep',
+		// chartArea: {left: '10%', top: 0, width: '80%', height: '100%'},
+		titleTextStyle: {color: highContrast},
+		backgroundColor: backgroundColor,
+		// chartArea: {backgroundColor: chartAreaBackgroundColor},
 		animation: {
 			duration: 1000,
 			easing: 'inAndOut',
 			startup: true
 		},
 		vAxis: { 
-			title: 'hours', 
+			// title: 'hours', 
+			baselineColor: highContrast,
 			gridlines: {
-			// 	color: 'transparent',
+				color: '#808080',
 			},
 			// ticks: [1,2,3,4,5,6,7,8,9,10,11]
 		},
@@ -28,24 +40,24 @@ const SleepChart = ({ data }: SleepChartDataProps) => {
 			title: currentMonthName,
 			textStyle: {
 				fontSize: 8,
+				color: highContrast
 			},
+			titleTextStyle: { color: highContrast},
 		},
 		seriesType: 'bars',
 		isStacked: true,
 		series: {
-			0: { color: '#3d66ad' },
+			0: { color: '#0099cc' },
 			1: { color: 'transparent', fillOpacity: 0 },
-			2: { color: '#3d66ad' },
-			3: { type: 'line', color: '#00996e' },
-			4: {
-				type: 'line'
-			},
+			2: { color: '#0099cc' },
+			3: { type: 'line', color: highContrast },
+			4: { type: 'line', color: '#9933ff'},
 			5: {
 				type: 'line',
 				lineWidth: 0,
 				pointsVisible: true,
 				pointSize: 5,
-				color: 'black',
+				color: highContrast,
 			},
 		},
 		curveType: 'function',
