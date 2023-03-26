@@ -7,7 +7,7 @@ import Calendar from './Calendar'
 const BboyChart = ({ data }: CalendarChartDataProps) => {
 	const options: google.visualization.CalendarOptions = {
 		title: 'Bboying',
-		height: 350,
+		// height: 350,
         colorAxis: {
             minValue: 0,
             maxValue: 2

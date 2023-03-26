@@ -6,7 +6,7 @@ import Calendar from './Calendar'
 const StrengthChart = ({ data }: CalendarChartDataProps) => {
 	const options: google.visualization.CalendarOptions = {
 		title: 'Strength',
-		height: 350,
+		// height: 350,
         colorAxis: {
             minValue: 6,
         }

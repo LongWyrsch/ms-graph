@@ -5,7 +5,7 @@ import Calendar from './Calendar'
 const DEUChart = ({ data }: CalendarChartDataProps) => {
 	const options: google.visualization.CalendarOptions = {
 		title: 'DEU',
-		height: 350,
+		// height: 150,
         colorAxis: {
             minValue: 1,
             // maxValue: 2

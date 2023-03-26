@@ -1,7 +1,7 @@
 import { AuthenticatedTemplate, UnauthenticatedTemplate, useIsAuthenticated } from '@azure/msal-react'
 import SignInButton from '../components/SignInButton'
 import SignOutButton from '../components/SignOutButton'
-import CalEvents from '@/components/CalEvents'
+import CalEvents from '@/components/Dashboard'
 
 export default function Home() {
 	const isAuthenticated = useIsAuthenticated()

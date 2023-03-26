@@ -73,3 +73,24 @@ a {
     background: black;
   }
 }
+
+
+.chartContainer{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.chartContainer > * {
+  width: 50%;
+}
+
+.nutritionCells {
+  font-size: 0.8rem;
+}
+
+.nutritionHeaders {
+  font-size: 0.8rem;
+}

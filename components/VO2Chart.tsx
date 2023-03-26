@@ -6,7 +6,7 @@ import Calendar from './Calendar'
 const VO2Chart = ({ data }: CalendarChartDataProps) => {
 	const options: google.visualization.CalendarOptions = {
 		title: 'VO2',
-		height: 350,
+		// height: 350,
         colorAxis: {
             minValue: 0.3,
         }

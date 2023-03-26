@@ -12,6 +12,11 @@ const SleepChart = ({ data }: SleepChartDataProps) => {
 	const currentMonthName = monthNames[today.getMonth()]
 	const options: google.visualization.ComboChartOptions = {
 		title: 'Sleep',
+		animation: {
+			duration: 1000,
+			easing: 'inAndOut',
+			startup: true
+		},
 		vAxis: { 
 			title: 'hours', 
 			gridlines: {
@@ -32,7 +37,7 @@ const SleepChart = ({ data }: SleepChartDataProps) => {
 			2: { color: '#3d66ad' },
 			3: { type: 'line', color: '#00996e' },
 			4: {
-				type: 'line',
+				type: 'line'
 			},
 			5: {
 				type: 'line',
@@ -44,7 +49,8 @@ const SleepChart = ({ data }: SleepChartDataProps) => {
 		},
 		curveType: 'function',
 		legend: { position: 'none' },
-		// width: 600,
+		tooltip: {trigger: 'selection'},
+		// width: 300,
 		// height: 400,
 		// legend: { position: 'none' },
 	}

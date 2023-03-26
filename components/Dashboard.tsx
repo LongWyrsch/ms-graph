@@ -19,7 +19,7 @@ import StrengthChart from './StrengthChart'
 import TableChart from './TableChart'
 import VO2Chart from './VO2Chart'
 
-const CalEvents = () => {
+const Dashboard = () => {
 	const { events, tasks } = useFetchGraphData()
 
 	let sleepData: SleepChartData | null = null
@@ -62,19 +62,11 @@ const CalEvents = () => {
 	console.log('tasks: ', tasks)
 
 	return (
-		<div>
-			{/* {loadingData && <div>Loading</div>} */}
-			{/* {graphData?.map((event, i)=> (
-                    <div key={i}>
-                        <div>{event.subject}</div>
-                        <div>{event.start.dateTime}</div>
-                        <br/>
-                    </div>
-            )
-            )} */}
+		<div className='chartContainer'>
 			{sleepData && <SleepChart data={sleepData} />}
 			{nutritionData && <NutritionChart data={nutritionData} />}
 			{DEUData && <DEUChart data={DEUData} />}
+			{bboyData && <BboyChart data={bboyData} />}
 			{strengthData && <StrengthChart data={strengthData} />}
 			{VO2Data && <VO2Chart data={VO2Data} />}
 			{wristsData && <MobilityChart data={wristsData} title='Wrists'/>}
@@ -83,9 +75,8 @@ const CalEvents = () => {
 			{rollData && <MobilityChart data={rollData} title='Roll'/>}
 			{neckData && <MobilityChart data={neckData} title='Neck'/>}
 			{flossData && <MobilityChart data={flossData} title='Floss'/>}
-			{bboyData && <BboyChart data={bboyData} />}
 		</div>
 	)
 }
 
-export default CalEvents
+export default Dashboard

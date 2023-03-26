@@ -7,7 +7,7 @@ type MobilityChartDataProps = CalendarChartDataProps & { title: string }
 const MobilityChart = ({ data, title }: MobilityChartDataProps) => {
 	const options: google.visualization.CalendarOptions = {
 		title: title,
-		height: 350,
+		// height: 350,
 		// colorAxis: {
 		//     minValue: 6,
 		// },

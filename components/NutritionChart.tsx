@@ -9,7 +9,12 @@ type NutritionChartDataProps = {
 
 const NutritionChart = ({ data }: NutritionChartDataProps) => {
 	const options: google.visualization.TableOptions = {
-		height: 130
+		height: 130,
+        cssClassNames: {
+            tableCell: 'nutritionCells',
+            headerCell: 'nutritionHeaders'
+        },
+        // alternatingRowStyle: false
 	}
 
 	return (

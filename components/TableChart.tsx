@@ -49,6 +49,7 @@ const TableChart: React.FC<TableChartProps> = ({ data, options }) => {
 	    // ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
 
         chartData.addRows(transposedData);
+        
 
 		// Create and draw the chart
 		const chart = new window.google.visualization.Table(chartRef.current)

@@ -48,9 +48,9 @@ export const formatSleepEvents = (fetchedObj: FetchedEventsObj) => {
 		const endTime = dateTimeToHour(event.end.dateTime) + timezoneOffset
 		
 
-		let block1 = 0
-		let block2 = 0
-		let block3 = 0
+		let block1 = null
+		let block2 = null
+		let block3 = null
 		let total = 0
 		if (startTime > 18 && endTime < 12) {
 			block1 = (24 - startTime) * -1
