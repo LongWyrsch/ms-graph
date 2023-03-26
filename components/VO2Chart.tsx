@@ -8,6 +8,7 @@ const VO2Chart = ({ data }: CalendarChartDataProps) => {
 		title: 'VO2',
 		// height: 350,
         colorAxis: {
+            colors: ['#ff9933', '#cc6600'],
             minValue: 0.3,
         }
 	}

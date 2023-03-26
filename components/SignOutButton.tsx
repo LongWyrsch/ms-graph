@@ -12,7 +12,7 @@ export default function SignOutButton() {
 
     return (
         <div style={{ padding: "5px", position: 'absolute', top: '0', right: '0'}}>
-            <button onClick={handleLogout} style={{fontSize: '1rem'}}>Logout</button>
+            <button onClick={handleLogout} style={{fontSize: '1rem', cursor: 'pointer'}}>Logout</button>
         </div>
     )
 }

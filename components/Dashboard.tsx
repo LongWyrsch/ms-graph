@@ -39,7 +39,7 @@ const Dashboard = () => {
 	if (events) {
 		sleepData = formatSleepEvents(events.filter((calendar: FetchedEventsObj) => calendar.id === '1')[0])
 		bboyData = formatBboyEvents(events.filter((calendar: FetchedEventsObj) => calendar.id === '2')[0])
-		
+
 		const [strength, VO2, wrists, lowerBody, shoulder, roll, neck, floss] = formatHealthEvents(events.filter((calendar: FetchedEventsObj) => calendar.id === '3')[0])
 		strengthData = strength
 		VO2Data = VO2
@@ -49,7 +49,7 @@ const Dashboard = () => {
 		rollData = roll
 		neckData = neck
 		flossData = floss
-		
+
 		DEUData = formatDEUEvents(events.filter((calendar: FetchedEventsObj) => calendar.id === '4')[0])
 		//      codeData = formatCodeEvents(events.filter((calendar: FetchedEventsObj) => calendar.id === '5')[0])
 	}
@@ -62,21 +62,22 @@ const Dashboard = () => {
 	console.log('tasks: ', tasks)
 
 	return (
-		<div className='chartContainer'>
+		<div className="chartContainer">
 			{sleepData && <SleepChart data={sleepData} />}
 			{nutritionData && <NutritionChart data={nutritionData} />}
 			{DEUData && <DEUChart data={DEUData} />}
 			{bboyData && <BboyChart data={bboyData} />}
 			{strengthData && <StrengthChart data={strengthData} />}
 			{VO2Data && <VO2Chart data={VO2Data} />}
-			{wristsData && <MobilityChart data={wristsData} title='Wrists'/>}
-			{lowerBodyData && <MobilityChart data={lowerBodyData} title='Lower Body'/>}
-			{shoulderData && <MobilityChart data={shoulderData} title='Shoulder'/>}
-			{rollData && <MobilityChart data={rollData} title='Roll'/>}
-			{neckData && <MobilityChart data={neckData} title='Neck'/>}
-			{flossData && <MobilityChart data={flossData} title='Floss'/>}
+			{wristsData && <MobilityChart data={wristsData} title="Wrists" />}
+			{lowerBodyData && <MobilityChart data={lowerBodyData} title="Lower Body" />}
+			{shoulderData && <MobilityChart data={shoulderData} title="Shoulder" />}
+			{rollData && <MobilityChart data={rollData} title="Roll" />}
+			{neckData && <MobilityChart data={neckData} title="Neck" />}
+			{flossData && <MobilityChart data={flossData} title="Floss" />}
 		</div>
 	)
 }
 
 export default Dashboard
+

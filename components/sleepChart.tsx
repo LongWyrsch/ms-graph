@@ -20,8 +20,9 @@ const SleepChart = ({ data }: SleepChartDataProps) => {
 		vAxis: { 
 			title: 'hours', 
 			gridlines: {
-				color: 'transparent',
+			// 	color: 'transparent',
 			},
+			// ticks: [1,2,3,4,5,6,7,8,9,10,11]
 		},
 		hAxis: {
 			title: currentMonthName,

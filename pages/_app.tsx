@@ -4,17 +4,10 @@ import { EventType, PublicClientApplication } from '@azure/msal-browser'
 import { msalConfig } from '../config/authConfig'
 import { MsalProvider } from '@azure/msal-react'
 import Head from 'next/head'
+import { useTheme } from '@/hooks/useTheme'
 
 export const msalInstance = new PublicClientApplication(msalConfig)
-// msalInstance.addEventCallback(event => {
-//   try {
-//     if (event.eventType === EventType.LOGIN_SUCCESS && event.payload.account) {
-//       msalInstance.setActiveAccount(event.payload.account);
-//     }
-//   } catch (error) {
-//     console.error("Something wrong in msalInstance.addEventCallback - ", error);
-//   }
-// });
+
 
 export default function App({ Component, pageProps }: AppProps) {
 	return (
@@ -24,9 +17,9 @@ export default function App({ Component, pageProps }: AppProps) {
 				<meta name="description" content="myHabits" />
 				<link rel="icon" href="/IcBaselineEventAvailable.svg" />
 			</Head>
-				<MsalProvider instance={msalInstance}>
+			<MsalProvider instance={msalInstance}>
 					<Component {...pageProps} />
-				</MsalProvider>
+			</MsalProvider>
 		</>
 	)
 }

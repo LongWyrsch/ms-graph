@@ -9,6 +9,7 @@ const BboyChart = ({ data }: CalendarChartDataProps) => {
 		title: 'Bboying',
 		// height: 350,
         colorAxis: {
+            colors: ['#ff5050', '#ff5050'],
             minValue: 0,
             maxValue: 2
         }

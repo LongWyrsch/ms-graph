@@ -8,9 +8,10 @@ const MobilityChart = ({ data, title }: MobilityChartDataProps) => {
 	const options: google.visualization.CalendarOptions = {
 		title: title,
 		// height: 350,
-		// colorAxis: {
+		colorAxis: {
+            colors: ['#ff9933', '#cc6600'],
 		//     minValue: 6,
-		// },
+		},
 		// noDataPattern: {
 		// 	backgroundColor: 'lightGray',
 		// 	color: 'lightGray',

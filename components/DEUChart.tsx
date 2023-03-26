@@ -7,6 +7,7 @@ const DEUChart = ({ data }: CalendarChartDataProps) => {
 		title: 'DEU',
 		// height: 150,
         colorAxis: {
+            colors: ['#99ff99', '#009933'],
             minValue: 1,
             // maxValue: 2
         }

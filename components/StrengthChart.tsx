@@ -8,6 +8,7 @@ const StrengthChart = ({ data }: CalendarChartDataProps) => {
 		title: 'Strength',
 		// height: 350,
         colorAxis: {
+            colors: ['#ff9933', '#cc6600'],
             minValue: 6,
         }
 	}
