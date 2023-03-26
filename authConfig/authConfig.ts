@@ -5,7 +5,8 @@ export const msalConfig: Configuration = {
     auth: {
         clientId: process.env.NEXT_PUBLIC_CLIENTID!,
         authority: "https://login.microsoftonline.com/common",
-        redirectUri: "http://localhost:3000",    // redirectUri: "/",
+        // redirectUri: "http://localhost:3000",    // redirectUri: "/",
+        redirectUri: "https://ms-graph.vercel.app/",    // redirectUri: "/",
         postLogoutRedirectUri: "/"
     },
     cache: {
