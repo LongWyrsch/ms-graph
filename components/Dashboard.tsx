@@ -1,6 +1,6 @@
 import React from 'react'
 import { useFetchGraphData } from '@/hooks/useFetchGraphData'
-import { CalendarChartData, FetchedEventsObj, NutritionChartData, SleepChartData } from '@/types/commonType'
+import { CalendarChartData, FetchedEvents, FetchedEventsObj, NutritionChartData, SleepChartData } from '@/types/commonType'
 import { formatBboyEvents } from '@/utils/formatBboyEvents'
 import { formatDEUEvents } from '@/utils/formatDEUEvents'
 import { formatHealthEvents } from '@/utils/formatHealthEvents'
@@ -14,9 +14,11 @@ import Nutrition from './Nutrition'
 import Sleep from './Sleep'
 import Strength from './Strength'
 import VO2 from './VO2'
+import { getCategory } from '@/utils/getCategory'
+import { sortEventsByCategory } from '@/utils/sortEventsByCategory'
 
 const Dashboard = () => {
-	const { events, tasks } = useFetchGraphData()
+	const { fetchedEvents, tasks } = useFetchGraphData()
 
 	// Set data to null to conditionally render their component
 	let sleepData: SleepChartData | null = null
@@ -34,11 +36,15 @@ const Dashboard = () => {
 	// let codeData = null
 	
 	// Format the data received from the Graph
-	if (events && events.length > 0) {
-		sleepData = formatSleepEvents(events.filter((calendar: FetchedEventsObj) => calendar.id === '1')[0])
-		bboyData = formatBboyEvents(events.filter((calendar: FetchedEventsObj) => calendar.id === '2')[0])
+	if (fetchedEvents && fetchedEvents.body.value.length > 0) {
+		const events = fetchedEvents.body.value
 
-		const [strength, VO2, wrists, lowerBody, shoulder, roll, neck, floss] = formatHealthEvents(events.filter((calendar: FetchedEventsObj) => calendar.id === '3')[0])
+		const {sleepEvents, bboyEvents, healthEvents, studyEvents, codeEvents} = sortEventsByCategory(events)
+
+		sleepData = formatSleepEvents(sleepEvents)
+		bboyData = formatBboyEvents(bboyEvents)
+
+		const [strength, VO2, wrists, lowerBody, shoulder, roll, neck, floss] = formatHealthEvents(healthEvents)
 		strengthData = strength
 		VO2Data = VO2
 		wristsData = wrists
@@ -48,7 +54,7 @@ const Dashboard = () => {
 		neckData = neck
 		flossData = floss
 
-		DEUData = formatDEUEvents(events.filter((calendar: FetchedEventsObj) => calendar.id === '4')[0])
+		DEUData = formatDEUEvents(studyEvents)
 	}
 
 	// Format the data received from the Graph

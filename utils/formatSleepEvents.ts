@@ -1,9 +1,8 @@
-import { FetchedEventsObj, SleepChartData } from '@/types/commonType'
+import { FetchedEvents, FetchedEventsObj, SleepChartData } from '@/types/commonType'
 import { firstAndLastDayOfMonth } from './firstAndLastDayOfMonth'
 import { dateToDay } from './formatDates'
 
-export const formatSleepEvents = (fetchedObj: FetchedEventsObj) => {
-	const events = fetchedObj.body.value
+export const formatSleepEvents = (events: FetchedEvents[]) => {
 	const goal = 8 // wake up at 8am
 
 	let sleepData: SleepChartData = [['date', 'block1', 'block2', 'block3', 'total', 'goal', 'weekend']]

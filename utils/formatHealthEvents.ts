@@ -1,9 +1,8 @@
 
-import { CalendarChartData, FetchedEventsObj } from '@/types/commonType'
+import { CalendarChartData, FetchedEvents, FetchedEventsObj } from '@/types/commonType'
 import { getDurationHours } from './getDurationHours'
 
-export const formatHealthEvents = (fetchedObj: FetchedEventsObj) => {
-	const events = fetchedObj.body.value
+export const formatHealthEvents = (events: FetchedEvents[]) => {
 
     // Create data array and add a row for today, so that the calendar shows today's cell
 	let strengthData: CalendarChartData = [[new Date(), -1]]

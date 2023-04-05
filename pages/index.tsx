@@ -22,8 +22,6 @@ export default function Home() {
 		}, 2000)
 	}, [theme])
 
-	console.log(theme)
-
 	return (
 		<div>
 			{isAuthenticated ? <SignOutButton /> : <SignInButton />}
