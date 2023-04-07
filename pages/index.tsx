@@ -18,7 +18,8 @@ export default function Home() {
 		document.documentElement.setAttribute('data-theme', theme)
 	}, [theme])
 
-
+	const env = process.env.NODE_ENV
+	console.log(env)
 	console.log('rendering index')
 
 	return (

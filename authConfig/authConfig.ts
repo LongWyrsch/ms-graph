@@ -1,12 +1,20 @@
 import { Configuration, RedirectRequest } from "@azure/msal-browser";
 
+const env = process.env.NODE_ENV
+let redirectUri = ''
+if(env == "development"){
+    redirectUri= "http://localhost:3000"
+}
+else if (env == "production"){
+    redirectUri= "https://ms-graph.vercel.app/"
+}
+
 // Config object to be passed to Msal on creation
 export const msalConfig: Configuration = {
     auth: {
         clientId: process.env.NEXT_PUBLIC_CLIENTID!,
         authority: "https://login.microsoftonline.com/common",
-        redirectUri: "http://localhost:3000",    // redirectUri: "/",
-        // redirectUri: "https://ms-graph.vercel.app/",    // redirectUri: "/",
+        redirectUri: redirectUri,    // redirectUri: "/",
         postLogoutRedirectUri: "/"
     },
     cache: {
