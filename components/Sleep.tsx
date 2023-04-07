@@ -22,7 +22,7 @@ const Sleep = ({ data }: SleepChartDataProps) => {
 	// Define chart options
 	const options: google.visualization.ComboChartOptions = {
 		title: 'Sleep',
-		// chartArea: {left: '10%', top: 0, width: '80%', height: '100%'},
+		chartArea: {width: '90%'},
 		titleTextStyle: {
 			color: highContrast,
 			fontSize: 25
@@ -53,9 +53,10 @@ const Sleep = ({ data }: SleepChartDataProps) => {
 		seriesType: 'bars',
 		isStacked: true,
 		series: {
-			0: { color: '#0099cc' },
+			0: { color: '#5380c9' },
 			1: { color: 'transparent', fillOpacity: 0 },
-			2: { color: '#0099cc' },
+			// 1: { color: '#fc03f4'},
+			2: { color: '#5380c9' },
 			3: { type: 'line', color: highContrast },
 			4: { type: 'line', color: '#9933ff'},
 			5: {

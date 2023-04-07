@@ -29,10 +29,10 @@ export const useFetchGraphData = () => {
 				let year = d.getFullYear();
 				
 				// get events  
-				const journalCalendarID = `https://graph.microsoft.com/v1.0/me/calendars/AQMkADAwATNiZmYAZC1jZDUwLTFmOWItMDACLTAwCgBGAAAD6KEmf4NA006sAzSRFCKcLQcABbbzqMwVoEedSATsfRywKwAAAgEGAAAABbbzqMwVoEedSATsfRywKwAGFrxbQwAAAA==/events?$select=subject,body,start,end&$filter=start/dateTime ge '${year}-01-01T00:00:00Z' and end/dateTime le '${year}-12-31T23:59:59Z'`
-				callMsGraph('journalCalendarID', accessToken).then((response) => {
-					setfetchedEvents(response.responses)
+				const journalCalendarID = `https://graph.microsoft.com/v1.0/me/calendars/AQMkADAwATNiZmYAZC1jZDUwLTFmOWItMDACLTAwCgBGAAAD6KEmf4NA006sAzSRFCKcLQcABbbzqMwVoEedSATsfRywKwAAAgEGAAAABbbzqMwVoEedSATsfRywKwAGFrxbQwAAAA==/events?$select=subject,body,start,end&$filter=start/dateTime ge '${year}-01-01T00:00:00Z' and end/dateTime le '${year}-12-31T23:59:59Z'&$top=999`
 
+				callMsGraph(journalCalendarID, accessToken).then((response) => {
+					setfetchedEvents(response)
 					// Once events are fetched, get tasks
 					callMsGraph(
 						'https://graph.microsoft.com/v1.0/me/todo/lists/AQMkADAwATNiZmYAZC1jZDUwLTFmOWItMDACLTAwCgAuAAAD6KEmf4NA006sAzSRFCKcLQEABbbzqMwVoEedSATsfRywKwAGDs4OAwAAAA==/tasks',

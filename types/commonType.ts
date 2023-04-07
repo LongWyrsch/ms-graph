@@ -16,11 +16,7 @@ export interface FetchedEvents {
 }
 
 export interface FetchedEventsObj {
-    id: string
-    status: number
-    body: {
-        value: FetchedEvents[]
-    }
+    value: FetchedEvents[]
 }
 
 export type BatchResponse = FetchedEventsObj[]
@@ -29,8 +25,8 @@ export type CalendarChartDataProps = {
 	data: CalendarChartData
 }
 
-
-export type SleepChartData  = Array<[string, number|string|null, number|string|null, number|string|null, number|string|null, number|string|null, number|string|null]>
+type comboChartHeader = {label: string, type: string}
+export type SleepChartData  = Array<[string|comboChartHeader, number|null|comboChartHeader, number|null|comboChartHeader, number|null|comboChartHeader, number|null|comboChartHeader, number|null|comboChartHeader, number|null|comboChartHeader]>
 
 export type CalendarChartData = Array<[Date, number]>
 

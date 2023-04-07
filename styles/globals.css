@@ -53,6 +53,13 @@ a {
   width: 50%;
 }
 
+.chartContainer > *:nth-child(1) {
+  width: 55%;
+}
+
+.chartContainer > *:nth-child(2) {
+  width: 45%;
+}
 
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~  */
 /* ~ ~ ~ ~ ~ ~ ~ ~ LIGHT nutrition table ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~  */

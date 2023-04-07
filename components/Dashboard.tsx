@@ -16,6 +16,7 @@ import Strength from './Strength'
 import VO2 from './VO2'
 import { getCategory } from '@/utils/getCategory'
 import { sortEventsByCategory } from '@/utils/sortEventsByCategory'
+import { hideCalendarColorLegend, hideTextElements } from '@/utils/hideElements'
 
 const Dashboard = () => {
 	const { fetchedEvents, tasks } = useFetchGraphData()
@@ -36,9 +37,8 @@ const Dashboard = () => {
 	// let codeData = null
 	
 	// Format the data received from the Graph
-	if (fetchedEvents && fetchedEvents.body.value.length > 0) {
-		const events = fetchedEvents.body.value
-
+	if (fetchedEvents && fetchedEvents.value.length > 0) {
+		const events = fetchedEvents.value
 		const {sleepEvents, bboyEvents, healthEvents, studyEvents, codeEvents} = sortEventsByCategory(events)
 
 		sleepData = formatSleepEvents(sleepEvents)
@@ -55,6 +55,12 @@ const Dashboard = () => {
 		flossData = floss
 
 		DEUData = formatDEUEvents(studyEvents)
+
+
+		setTimeout(() => {
+			hideTextElements()
+			hideCalendarColorLegend()
+		}, 2000)
 	}
 
 	// Format the data received from the Graph

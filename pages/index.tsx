@@ -16,18 +16,17 @@ export default function Home() {
 
 	useEffect(() => {
 		document.documentElement.setAttribute('data-theme', theme)
-		setTimeout(() => {
-			hideTextElements()
-			hideCalendarColorLegend()
-		}, 2000)
 	}, [theme])
+
+
+	console.log('rendering index')
 
 	return (
 		<div>
 			{isAuthenticated ? <SignOutButton /> : <SignInButton />}
 
 			<AuthenticatedTemplate>
-				<ThemeButton toggleTheme={toggleTheme}/>
+				<ThemeButton toggleTheme={toggleTheme} />
 				<themeContext.Provider value={theme}>
 					<Dashboard />
 				</themeContext.Provider>

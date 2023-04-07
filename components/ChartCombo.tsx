@@ -24,7 +24,7 @@ const ChartCombo: React.FC<ComboChartProps> = ({ data, options }) => {
 
 	useLoadChart(drawChart, data, options, 'corechart')
 
-	return <div ref={chartRef}></div>
+	return <div ref={chartRef} className='comboChart'></div>
 }
 
 export default ChartCombo
