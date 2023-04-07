@@ -17,6 +17,7 @@ import VO2 from './VO2'
 import { getCategory } from '@/utils/getCategory'
 import { sortEventsByCategory } from '@/utils/sortEventsByCategory'
 import { hideCalendarColorLegend, hideTextElements } from '@/utils/hideElements'
+import Message from './Message'
 
 const Dashboard = () => {
 	const { fetchedEvents, tasks } = useFetchGraphData()
@@ -74,6 +75,7 @@ const Dashboard = () => {
 
 	return (
 		<div className="chartContainer">
+			{!fetchedEvents && <Message message='Loading...'/>}
 			{sleepData && <Sleep data={sleepData} />}
 			{nutritionData && <Nutrition data={nutritionData} />}
 			{DEUData && <DEU data={DEUData} />}

@@ -4,8 +4,7 @@ const env = process.env.NODE_ENV
 let redirectUri = ''
 if(env == "development"){
     redirectUri= "http://localhost:3000"
-}
-else if (env == "production"){
+} else if (env == "production"){
     redirectUri= "https://ms-graph.vercel.app/"
 }
 
@@ -30,6 +29,6 @@ export const loginRequest: RedirectRequest = {
 };
 
 // Add here the endpoints for MS Graph API services you would like to use.
-export const graphConfig = {
-    graphMeEndpoint: "https://graph.microsoft.com/v1.0/me/events?$orderby=start/dateTime%20desc&$top=100"
-};
+// export const graphConfig = {
+//     graphMeEndpoint: "https://graph.microsoft.com/v1.0/me/events?$orderby=start/dateTime%20desc&$top=100"
+// };

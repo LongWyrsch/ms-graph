@@ -61,6 +61,14 @@ a {
   width: 45%;
 }
 
+.message{
+  font-size: 3rem;
+  position: fixed;
+  left: 45vw;
+  top: 45vh;
+  transform: translateX(-50%);
+}
+
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~  */
 /* ~ ~ ~ ~ ~ ~ ~ ~ LIGHT nutrition table ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~  */
 
