@@ -9,10 +9,11 @@ export const sortEventsByCategory = (events: FetchedEvents[]) => {
 	let codeEvents: FetchedEvents[] = []
 
 	events.forEach((event) => {
-		if (event.subject.includes('#sleep')) {
-			sleepEvents.push(event)
-		} else {
-			switch (getCategory(event.body.content)) {
+		if (event.categories[0]) {
+			switch (event.categories[0].toLowerCase()) {
+				case '#sleep':
+					sleepEvents.push(event)
+					break
 				case '#bboy':
 					bboyEvents.push(event)
 					break

@@ -1,18 +1,19 @@
 export interface FetchedEvents {
+    id: string
+    subject: string
     body: {
         contentType: string 
         content: string
     }
+    categories: string[]
     end: {
         dateTime: string
         timeZone: string
-    }
-    id: string
+    },
     start: {
         dateTime: string
         timeZone: string
     }
-    subject: string
 }
 
 export interface FetchedEventsObj {
