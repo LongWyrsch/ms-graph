@@ -36,11 +36,11 @@ const Dashboard = () => {
 	let flossData: CalendarChartData | null = null
 	let DEUData: CalendarChartData | null = null
 	// let codeData = null
-	
+
 	// Format the data received from the Graph
 	if (fetchedEvents && fetchedEvents.value.length > 0) {
 		const events = fetchedEvents.value
-		const {sleepEvents, bboyEvents, healthEvents, studyEvents, codeEvents} = sortEventsByCategory(events)
+		const { sleepEvents, bboyEvents, healthEvents, studyEvents, codeEvents } = sortEventsByCategory(events)
 
 		sleepData = formatSleepEvents(sleepEvents)
 		bboyData = formatBboyEvents(bboyEvents)
@@ -56,7 +56,6 @@ const Dashboard = () => {
 		flossData = floss
 
 		DEUData = formatDEUEvents(studyEvents)
-
 
 		setTimeout(() => {
 			hideTextElements()
@@ -75,7 +74,7 @@ const Dashboard = () => {
 
 	return (
 		<div className="chartContainer">
-			{!fetchedEvents && <Message message='Loading...'/>}
+			{!fetchedEvents && <Message message="Loading..." />}
 			{sleepData && <Sleep data={sleepData} />}
 			{nutritionData && <Nutrition data={nutritionData} />}
 			{DEUData && <DEU data={DEUData} />}
@@ -93,4 +92,3 @@ const Dashboard = () => {
 }
 
 export default Dashboard
-

@@ -1,8 +1,9 @@
 import { FetchedTasksObj, NutritionChartData } from '@/types/commonType'
+import { adjustForTimeZone } from './formatDate'
 
 export const formatNutrition = (tasks: FetchedTasksObj) => {
 
-	let nutritionData: NutritionChartData = [[ new Date('2000-01-01T00:00:00.0000000'),'pill', 'yogurt', 'probiotics', 'greens', 'protein']]
+	let nutritionData: NutritionChartData = [[ new Date('2000-01-01T00:00:00.0000000'),'fish oil', 'yogurt', 'probiotics', 'greens', 'protein']]
 
 	// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ Add a row for each day of the month ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
 	// 
@@ -20,20 +21,19 @@ export const formatNutrition = (tasks: FetchedTasksObj) => {
 	
 	if (tasks && tasks.length > 0) {
 		for (const task of tasks) {		
-			const name = task.title
-			const date = new Date(task.dueDateTime.dateTime)
+			const name = task.title.toLowerCase()
+			const date = adjustForTimeZone(task.dueDateTime.dateTime)
 			const status = task.status
 			let col = 0
 			switch (name) {
-				case 'pill': col = 1; break;
+				case 'fish oil': col = 1; break;
 				case 'yogurt': col = 2; break;
 				case 'probiotics': col = 3; break;
 				case 'greens': col = 4; break;
 				case 'protein': col = 5; break;
-				default: 
 			}
-			
-			if (status === "completed") {
+
+			if (status === "completed" && col !== 0) {
 				date.setHours(0, 0, 0, 0)			
 				const index = nutritionData.findIndex((row) => {
 					return row[0].getDate() == date.getDate() && row[0].getMonth() == date.getMonth()

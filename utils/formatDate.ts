@@ -8,3 +8,11 @@ export const dateTimeToDay = (date: Date) => {
 }
 
 
+export const adjustForTimeZone = (dateTimeString: string) => {
+	const dateTime = new Date(dateTimeString)
+	const timezoneOffset = (dateTime.getTimezoneOffset() / 60) * -1
+
+	dateTime.setTime(dateTime.getTime() + timezoneOffset * 60 * 60 * 1000)
+
+	return dateTime
+}

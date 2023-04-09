@@ -1,5 +1,6 @@
 import { CalendarChartData, FetchedEvents, FetchedEventsObj } from '@/types/commonType'
 import { getDurationHours } from './getDurationHours'
+import { adjustForTimeZone } from './formatDate'
 
 export const formatDEUEvents = (events: FetchedEvents[]) => {
 
@@ -8,8 +9,8 @@ export const formatDEUEvents = (events: FetchedEvents[]) => {
 
 	if (events && events.length > 0) {
         for (const event of events) {
-            const startDate = new Date(event.start.dateTime)
-            const endDate = new Date(event.end.dateTime)
+            const startDate = adjustForTimeZone(event.start.dateTime)
+            const endDate = adjustForTimeZone(event.end.dateTime)
             const durationHours = getDurationHours(startDate, endDate)
             const date = startDate
             date.setHours(0, 0, 0, 0)

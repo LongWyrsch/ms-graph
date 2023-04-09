@@ -1,6 +1,6 @@
-import { FetchedEvents, FetchedEventsObj, SleepChartData } from '@/types/commonType'
+import { FetchedEvents, SleepChartData } from '@/types/commonType'
 import { firstAndLastDayOfMonth } from './firstAndLastDayOfMonth'
-import { dateTimeToDay } from '@/utils/formatDate'
+import { adjustForTimeZone, dateTimeToDay } from '@/utils/formatDate'
 
 export const formatSleepEvents = (events: FetchedEvents[]) => {
 	const goal = 8 // wake up at 8am
@@ -85,15 +85,6 @@ const isWeekend = (date: Date) => {
 	return dayOfWeek === 0 || dayOfWeek === 6
 }
 
-const adjustForTimeZone = (dateTimeString: string) => {
-	const dateTime = new Date(dateTimeString)
-	const timezoneOffset = (dateTime.getTimezoneOffset() / 60) * -1
-
-	dateTime.setTime(dateTime.getTime() + timezoneOffset * 60 * 60 * 1000)
-
-	return dateTime
-}
-
 const dateTimeToHour = (dateTime: Date) => {
 	const hours = dateTime.getHours()
 	const minutes = dateTime.getMinutes()
@@ -123,19 +114,3 @@ const isCurrentMonth = (date: Date) => {
 
 	return eventMonth == currentMonth
 }
-
-// const dateTimeToDate = (dateTime: Date) => {
-
-// 	if (startTime > 18) {
-// 		// Adding one day to the date (1 day = 24 hours * 60 minutes * 60 seconds * 1000 milliseconds)
-// 		dateTime.setTime(dateTime.getTime() + 24 * 60 * 60 * 1000)
-// 	}
-
-// 	// Removing the time portion by setting hours, minutes, seconds, and milliseconds to zero
-// 	// dateTime.setHours(0, 0, 0, 0)
-
-// 	// Converting the modified Date object back to a string
-// 	const dateString = dateTimeToDay(dateTime)
-
-// 	return dateString // "21"
-// }
