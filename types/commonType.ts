@@ -5,7 +5,6 @@ export interface FetchedEvents {
         contentType: string 
         content: string
     }
-    categories: string[]
     end: {
         dateTime: string
         timeZone: string
@@ -17,7 +16,11 @@ export interface FetchedEvents {
 }
 
 export interface FetchedEventsObj {
-    value: FetchedEvents[]
+    id: string
+    status: number
+    body: {
+        value: FetchedEvents[]
+    }
 }
 
 export type BatchResponse = FetchedEventsObj[]

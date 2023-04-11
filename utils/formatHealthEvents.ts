@@ -3,7 +3,8 @@ import { CalendarChartData, FetchedEvents, FetchedEventsObj } from '@/types/comm
 import { getDurationHours } from './getDurationHours'
 import { adjustForTimeZone } from './formatDate'
 
-export const formatHealthEvents = (events: FetchedEvents[]) => {
+export const formatHealthEvents = (fetchedObj: FetchedEventsObj) => {
+	const events = fetchedObj.body.value
 
     // Create data array and add a row for today, so that the calendar shows today's cell
 	let strengthData: CalendarChartData = [[new Date(), -1]]

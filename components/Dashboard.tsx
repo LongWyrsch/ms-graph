@@ -14,8 +14,6 @@ import Nutrition from './Nutrition'
 import Sleep from './Sleep'
 import Strength from './Strength'
 import VO2 from './VO2'
-import { getCategory } from '@/utils/getCategory'
-import { sortEventsByCategory } from '@/utils/sortEventsByCategory'
 import { hideCalendarColorLegend, hideTextElements } from '@/utils/hideElements'
 import Message from './Message'
 
@@ -38,14 +36,11 @@ const Dashboard = () => {
 	// let codeData = null
 
 	// Format the data received from the Graph
-	if (fetchedEvents && fetchedEvents.value.length > 0) {
-		const events = fetchedEvents.value
-		const { sleepEvents, bboyEvents, healthEvents, studyEvents, codeEvents } = sortEventsByCategory(events)
-
-		sleepData = formatSleepEvents(sleepEvents)
-		bboyData = formatBboyEvents(bboyEvents)
-
-		const [strength, VO2, wrists, lowerBody, shoulder, roll, neck, floss] = formatHealthEvents(healthEvents)
+	if (fetchedEvents && fetchedEvents.length > 0) {
+		sleepData = formatSleepEvents(fetchedEvents.filter((calendar: FetchedEventsObj) => calendar.id === '1')[0])
+		bboyData = formatBboyEvents(fetchedEvents.filter((calendar: FetchedEventsObj) => calendar.id === '2')[0])
+		
+		const [strength, VO2, wrists, lowerBody, shoulder, roll, neck, floss] = formatHealthEvents(fetchedEvents.filter((calendar: FetchedEventsObj) => calendar.id === '3')[0])
 		strengthData = strength
 		VO2Data = VO2
 		wristsData = wrists
@@ -55,7 +50,7 @@ const Dashboard = () => {
 		neckData = neck
 		flossData = floss
 
-		DEUData = formatDEUEvents(studyEvents)
+		DEUData = formatDEUEvents(fetchedEvents.filter((calendar: FetchedEventsObj) => calendar.id === '4')[0])
 
 		setTimeout(() => {
 			hideTextElements()

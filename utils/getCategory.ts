@@ -1,4 +1,3 @@
-import { FetchedEvents } from '@/types/commonType'
 
 export const getCategory = (string: string): string | null => {
 	const regex = /(?<=>)#\S+(?=<br>)/
