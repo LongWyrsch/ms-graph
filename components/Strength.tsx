@@ -9,7 +9,7 @@ const Strength = ({ data }: CalendarChartDataProps) => {
 	const { calendarBackgroundColor, today } = useCalendarColors()
 
 	const options: google.visualization.CalendarOptions = {
-		title: 'Strength',
+		title: 'Strength (min 3 sets of each)',
 		colorAxis: {
 			colors: [today, calendarBackgroundColor, '#ff9933', '#cc6600'],
 			values: [-1, 0, 6, 12],

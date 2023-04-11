@@ -77,12 +77,12 @@ const Dashboard = () => {
 			{bboyData && <Bboy data={bboyData} />}
 			{strengthData && <Strength data={strengthData} />}
 			{VO2Data && <VO2 data={VO2Data} />}
-			{wristsData && <Mobility data={wristsData} title="Wrists" />}
-			{lowerBodyData && <Mobility data={lowerBodyData} title="Lower Body" />}
-			{shoulderData && <Mobility data={shoulderData} title="Shoulder" />}
-			{rollData && <Mobility data={rollData} title="Roll" />}
-			{neckData && <Mobility data={neckData} title="Neck" />}
-			{flossData && <Mobility data={flossData} title="Floss" />}
+			{wristsData && <Mobility data={wristsData} title="Wrists (do all 4)" lBound={4} uBound={4} />}
+			{lowerBodyData && <Mobility data={lowerBodyData} title="Lower Body (min 6/9 positions)" lBound={6} uBound={9} />}
+			{shoulderData && <Mobility data={shoulderData} title="Shoulder (min 4/5 positions)" lBound={4} uBound={5} />}
+			{rollData && <Mobility data={rollData} title="Roll (min 30mn)" lBound={0.5} uBound={1} />}
+			{neckData && <Mobility data={neckData} title="Neck (every 3 days)" lBound={0} uBound={3} />}
+			{flossData && <Mobility data={flossData} title="Floss (do all 4)" lBound={4} uBound={4} />}
 		</div>
 	)
 }

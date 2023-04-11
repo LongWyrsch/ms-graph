@@ -10,7 +10,7 @@ const DEU = ({ data }: CalendarChartDataProps) => {
 	const { calendarBackgroundColor, today } = useCalendarColors()
 
 	const options: google.visualization.CalendarOptions = {
-		title: 'DEU',
+		title: 'DEU (1hr to 3hrs)',
 		colorAxis: {
 			colors: [today, calendarBackgroundColor, '#99ff99', '#009933'],
 			values: [-1, 0, 1, 3],

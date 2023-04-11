@@ -51,7 +51,7 @@ export const formatHealthEvents = (events: FetchedEvents[]) => {
             } else if (event.subject.includes('#run') || event.subject.includes('#bike') || event.subject.includes('#swim')) {
                 const durationHours = getDurationHours(startDate, endDate)
                 
-                // Goal of 20mn is set by min value in the calendar chart options
+                // Colors varies from 0mn to 1hr.
                 const index = VO2Data.findIndex(row => {row[0]==date})
                 if (index > -1) {
                     VO2Data[index][1] += durationHours
@@ -95,10 +95,10 @@ export const formatHealthEvents = (events: FetchedEvents[]) => {
                     // WRISTS => do all daily
                     wristsData.push([date, wristsClockWalks + fingerCurls + wristPushUps + fistKnucklePushUps])
                 } else if (adductors || hamstrings || powermoveStretch || quads || hipFlexors || pigeon || butterfly || glutes || sideHipStretch) {
-                    // LOWER BODY => do all daily
+                    // LOWER BODY => do min 6/9 daily
                     lowerBodyData.push([date, adductors + hamstrings + powermoveStretch + quads + hipFlexors + pigeon + butterfly + glutes + sideHipStretch])
                 } else if ( shoulderFlexionChair || shoulderFlexionHang || shoulderExtRotation || shoulderIntRotation || shouldersExtension) {
-                    // SHOULDERS => do all daily
+                    // SHOULDERS => do min 4/5 daily
                     shoulderData.push([date, shoulderFlexionChair + shoulderFlexionHang + shoulderExtRotation + shoulderIntRotation + shouldersExtension])
                 } else if ( quadsRoll || ITBandRoll || calvesRoll || hamstringsRoll || glutesRoll || trapsRoll) {
                     // ROLL => 30mn daily

@@ -9,10 +9,10 @@ const VO2 = ({ data }: CalendarChartDataProps) => {
 	const { calendarBackgroundColor, today } = useCalendarColors()
 
 	const options: google.visualization.CalendarOptions = {
-		title: 'VO2',
+		title: 'VO2 (0mn to 60mn)',
 		colorAxis: {
 			colors: [today, calendarBackgroundColor, '#ff9933', '#cc6600'],
-			values: [-1, 0, 0.3, 1],
+			values: [-1, 0, 0, 1],
 		},
 		// height: 350,
 	}
