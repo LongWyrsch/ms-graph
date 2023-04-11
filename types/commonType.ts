@@ -25,6 +25,13 @@ export interface FetchedEventsObj {
 
 export type BatchResponse = FetchedEventsObj[]
 
+export type GroupedResponses = {
+    sleepEvents: FetchedEvents[]
+    bboyEvents: FetchedEvents[]
+    healthEvents: FetchedEvents[]
+    studyEvents: FetchedEvents[]
+}
+
 export type CalendarChartDataProps = {
 	data: CalendarChartData
 }

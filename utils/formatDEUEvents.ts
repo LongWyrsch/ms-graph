@@ -3,8 +3,7 @@ import { getDurationHours } from './getDurationHours'
 import { adjustForTimeZone } from './formatDate'
 
 
-export const formatDEUEvents = (fetchedObj: FetchedEventsObj) => {
-	const events = fetchedObj.body.value
+export const formatDEUEvents = (events: FetchedEvents[]) => {
 
     // Create data array and add a row for today, so that the calendar shows today's cell
 	let DEUData: CalendarChartData = [[new Date(), -1]]

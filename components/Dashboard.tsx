@@ -36,11 +36,12 @@ const Dashboard = () => {
 	// let codeData = null
 
 	// Format the data received from the Graph
-	if (fetchedEvents && fetchedEvents.length > 0) {
-		sleepData = formatSleepEvents(fetchedEvents.filter((calendar: FetchedEventsObj) => calendar.id === '1')[0])
-		bboyData = formatBboyEvents(fetchedEvents.filter((calendar: FetchedEventsObj) => calendar.id === '2')[0])
+	if (fetchedEvents) {
+		console.log(fetchedEvents)
+		sleepData = formatSleepEvents(fetchedEvents.sleepEvents)
+		bboyData = formatBboyEvents(fetchedEvents.bboyEvents)
 		
-		const [strength, VO2, wrists, lowerBody, shoulder, roll, neck, floss] = formatHealthEvents(fetchedEvents.filter((calendar: FetchedEventsObj) => calendar.id === '3')[0])
+		const [strength, VO2, wrists, lowerBody, shoulder, roll, neck, floss] = formatHealthEvents(fetchedEvents.healthEvents)
 		strengthData = strength
 		VO2Data = VO2
 		wristsData = wrists
@@ -50,7 +51,7 @@ const Dashboard = () => {
 		neckData = neck
 		flossData = floss
 
-		DEUData = formatDEUEvents(fetchedEvents.filter((calendar: FetchedEventsObj) => calendar.id === '4')[0])
+		DEUData = formatDEUEvents(fetchedEvents.studyEvents)
 
 		setTimeout(() => {
 			hideTextElements()

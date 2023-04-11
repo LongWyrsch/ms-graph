@@ -2,8 +2,7 @@ import { CalendarChartData, FetchedEvents, FetchedEventsObj } from '@/types/comm
 import { getDurationHours } from './getDurationHours'
 import { adjustForTimeZone } from './formatDate'
 
-export const formatBboyEvents = (fetchedObj: FetchedEventsObj) => {
-	const events = fetchedObj.body.value
+export const formatBboyEvents = (events: FetchedEvents[]) => {
     // Create data array and add a row for today, so that the calendar shows today's cell
 	let bboyData: CalendarChartData = [[new Date(), -1]]
 

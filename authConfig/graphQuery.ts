@@ -57,11 +57,11 @@ const batchQuery = {
 			method: 'GET',
 			url: "/me/calendars/AQMkADAwATNiZmYAZC1jZDUwLTFmOWItMDACLTAwCgBGAAAD6KEmf4NA006sAzSRFCKcLQcABbbzqMwVoEedSATsfRywKwAAAgEGAAAABbbzqMwVoEedSATsfRywKwAGGT9pyAAAAA==/events?$select=subject,body,start,end&$filter=start/dateTime ge '2023-01-01T00:00:00Z' and end/dateTime le '2023-12-31T23:59:59Z'",
 		},
-		{
-			id: '5',  // code
-			method: 'GET',
-			url: "/me/calendars/AQMkADAwATNiZmYAZC1jZDUwLTFmOWItMDACLTAwCgBGAAAD6KEmf4NA006sAzSRFCKcLQcABbbzqMwVoEedSATsfRywKwAAAgEGAAAABbbzqMwVoEedSATsfRywKwAGGT9pyQAAAA==/events?$select=subject,body,start,end&$filter=start/dateTime ge '2023-01-01T00:00:00Z' and end/dateTime le '2023-12-31T23:59:59Z'",
-		},
+		// {
+		// 	id: '5',  // code
+		// 	method: 'GET',
+		// 	url: "/me/calendars/AQMkADAwATNiZmYAZC1jZDUwLTFmOWItMDACLTAwCgBGAAAD6KEmf4NA006sAzSRFCKcLQcABbbzqMwVoEedSATsfRywKwAAAgEGAAAABbbzqMwVoEedSATsfRywKwAGGT9pyQAAAA==/events?$select=subject,body,start,end&$filter=start/dateTime ge '2023-01-01T00:00:00Z' and end/dateTime le '2023-12-31T23:59:59Z'",
+		// },
 		// {
 		// 	id: '6',  // nutrition tasks. CANNOT FILTER TASKS! Will have to filter after query
 		// 	method: 'GET',
