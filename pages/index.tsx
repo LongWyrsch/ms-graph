@@ -24,29 +24,24 @@ export default function Home() {
 		const isEdge = userAgent.indexOf('Edg') > -1 // Microsoft Edge has 'Chrome' in its user agent string
 		const isOpera = userAgent.indexOf('OPR') > -1 // Opera has 'Chrome' in its user agent string
 		setisChrome(isChrome && !isEdge && !isOpera)
-
 	}, [theme])
 
 	return (
 		<div>
-			{!isChrome ? (
-				<Message message="Cross-site cookies must be enabled. Are you using Chrome?" />
-			) : (
-				<div>
-					{isAuthenticated ? <SignOutButton /> : <SignInButton />}
+			<div>
+				{isAuthenticated ? <SignOutButton /> : <SignInButton />}
 
-					<AuthenticatedTemplate>
-						<ThemeButton toggleTheme={toggleTheme} />
-						<themeContext.Provider value={theme}>
-							<Dashboard />
-						</themeContext.Provider>
-					</AuthenticatedTemplate>
+				<AuthenticatedTemplate>
+					<ThemeButton toggleTheme={toggleTheme} />
+					<themeContext.Provider value={theme}>
+						<Dashboard />
+					</themeContext.Provider>
+				</AuthenticatedTemplate>
 
-					<UnauthenticatedTemplate>
-						<p>You are not signed in! Please sign in.</p>
-					</UnauthenticatedTemplate>
-				</div>
-			)}
+				<UnauthenticatedTemplate>
+					<p>You are not signed in! Please sign in.</p>
+				</UnauthenticatedTemplate>
+			</div>
 		</div>
 	)
 }
