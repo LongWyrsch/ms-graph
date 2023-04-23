@@ -59,7 +59,7 @@ export const formatHealthEvents = (events: FetchedEvents[]) => {
                     VO2Data.push([date, durationHours])
                 }
             // ~~~~~~~~~~~~~~~~~~~~~~~~~~ MOBILITY ~~~~~~~~~~~~~~~~~~~~~~~~~~
-            } else if (event.subject.includes('#mobility')) {
+            } else if (event.subject.includes('#stretch') || event.subject.includes('#roll') || event.subject.includes('#floss')) {
                 const wristsClockWalks: number = body.match(/\[x\] `wrists clock walks`/i) ? 1 : 0
                 const fingerCurls: number = body.match(/\[x\] `finger curls`/i) ? 1 : 0
                 const wristPushUps: number = body.match(/\[x\] `wrist push-ups`/i) ? 1 : 0
