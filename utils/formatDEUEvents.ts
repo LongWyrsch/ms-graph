@@ -16,21 +16,22 @@ export const formatDEUEvents = (events: FetchedEvents[]) => {
             const date = startDate
             date.setHours(0, 0, 0, 0)
             
-            const grammatikHrs = event.subject.includes('#grammatik') ? durationHours : 0
-            const ubungenHrs = event.subject.includes('#übungen') ? durationHours : 0
-            const schreibenHrs = event.subject.includes('#schreiben') ? durationHours : 0
-            const lesenHrs = event.subject.includes('#lesen') ? durationHours : 0
+            // It doesn't matter the type of activity. As long as it's one of the below 4, it sums up the duration.
+            let studiedGerman = false
+            if (event.subject.includes('#grammatik') || event.subject.includes('#übungen') || event.subject.includes('#schreiben') || event.subject.includes('#lesen')) {
+                studiedGerman = true
+            }
             
             // Goal is 1h per day.
-            // Need to add duration of above event types.
-            if (grammatikHrs || ubungenHrs || schreibenHrs || lesenHrs) {
+            if (studiedGerman) {
+                // Check if I already studied German that day. If so, add to the duration.
                 const index = DEUData.findIndex((row) => {
                     row[0] == date
                 })
                 if (index > -1) {
-                    DEUData[index][1] += grammatikHrs + ubungenHrs + schreibenHrs + lesenHrs
+                    DEUData[index][1] += durationHours
                 } else {
-                    DEUData.push([date, grammatikHrs + ubungenHrs + schreibenHrs + lesenHrs])
+                    DEUData.push([date, durationHours])
                 }
             }
             
