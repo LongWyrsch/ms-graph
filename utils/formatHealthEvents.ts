@@ -74,7 +74,7 @@ export const formatHealthEvents = (events: FetchedEvents[]) => {
 				const shoulderFlexion: number = body.match(/\[x\] `shoulder flexion/i) ? 1 : 0
 				const shoulderExtRotation: number = body.match(/\[x\] `shoulder ext rotation/i) ? 1 : 0
 				const shoulderIntRotation: number = body.match(/\[x\] `shoulder int rotation/i) ? 1 : 0
-				const shouldersExtension: number = body.match(/\[x\] `shoulders extension/i) ? 1 : 0
+				const shouldersExtension: number = body.match(/\[x\] `shoulder extension/i) ? 1 : 0
 				const quadsRoll: number = body.match(/\[x\] `quads roll`/i) ? 1 : 0
 				const ITBandRoll: number = body.match(/\[x\] `IT band roll`/i) ? 1 : 0
 				const calvesRoll: number = body.match(/\[x\] `calves roll`/i) ? 1 : 0
@@ -91,19 +91,24 @@ export const formatHealthEvents = (events: FetchedEvents[]) => {
 				if (wristsClockWalks || fingerCurls || wristPushUps || fistKnucklePushUps) {
 					// WRISTS => do all daily
 					wristsData.push([date, wristsClockWalks + fingerCurls + wristPushUps + fistKnucklePushUps])
-				} else if (adductors || hamstrings || powermoveStretch || quads || hipFlexors || pigeon || butterfly || glutes || sideHipStretch) {
+				} 
+				if (adductors || hamstrings || powermoveStretch || quads || hipFlexors || pigeon || butterfly || glutes || sideHipStretch) {
 					// LOWER BODY => do min 6/9 daily
 					lowerBodyData.push([date, adductors + hamstrings + powermoveStretch + quads + hipFlexors + pigeon + butterfly + glutes + sideHipStretch])
-				} else if (shoulderFlexion || shoulderExtRotation || shoulderIntRotation || shouldersExtension) {
+				} 
+				if (shoulderFlexion || shoulderExtRotation || shoulderIntRotation || shouldersExtension) {
 					// SHOULDERS => do all 4 daily
 					shoulderData.push([date, shoulderFlexion + shoulderExtRotation + shoulderIntRotation + shouldersExtension])
-				} else if (quadsRoll || ITBandRoll || calvesRoll || hamstringsRoll || glutesRoll || trapsRoll) {
+				} 
+				if (quadsRoll || ITBandRoll || calvesRoll || hamstringsRoll || glutesRoll || trapsRoll) {
 					// ROLL => 30mn daily
 					rollData.push([date, durationHours])
-				} else if (neckStrengthening || neckStretchSides || neckStretchDoor) {
+				} 
+				if (neckStrengthening || neckStretchSides || neckStretchDoor) {
 					// NECK => every 3 days
 					neckData.push([date, neckStrengthening + neckStretchSides + neckStretchDoor])
-				} else if (hamstringsFloss || radialNerve || medianNerve || ulnarNerve) {
+				} 
+				if (hamstringsFloss || radialNerve || medianNerve || ulnarNerve) {
 					// FLOSS => do all daily
 					flossData.push([date, hamstringsFloss + radialNerve + medianNerve + ulnarNerve])
 				}
