@@ -71,11 +71,10 @@ export const formatHealthEvents = (events: FetchedEvents[]) => {
 				const butterfly: number = body.match(/\[x\] `butterfly`/i) ? 1 : 0
 				const glutes: number = body.match(/\[x\] `glutes`/i) ? 1 : 0
 				const sideHipStretch: number = body.match(/\[x\] `side hip stretch`/i) ? 1 : 0
-				const shoulderFlexionChair: number = body.match(/\[x\] `shoulder flexion: elbows on chair`/i) ? 1 : 0
-				const shoulderFlexionHang: number = body.match(/\[x\] `shoulder flexion: 1 arm pronated hang`/i) ? 1 : 0
-				const shoulderExtRotation: number = body.match(/\[x\] `shoulder ext rotation: 360 with band`/i) ? 1 : 0
-				const shoulderIntRotation: number = body.match(/\[x\] `shoulder int rotation`/i) ? 1 : 0
-				const shouldersExtension: number = body.match(/\[x\] `shoulders extension`/i) ? 1 : 0
+				const shoulderFlexion: number = body.match(/\[x\] `shoulder flexion/i) ? 1 : 0
+				const shoulderExtRotation: number = body.match(/\[x\] `shoulder ext rotation/i) ? 1 : 0
+				const shoulderIntRotation: number = body.match(/\[x\] `shoulder int rotation/i) ? 1 : 0
+				const shouldersExtension: number = body.match(/\[x\] `shoulders extension/i) ? 1 : 0
 				const quadsRoll: number = body.match(/\[x\] `quads roll`/i) ? 1 : 0
 				const ITBandRoll: number = body.match(/\[x\] `IT band roll`/i) ? 1 : 0
 				const calvesRoll: number = body.match(/\[x\] `calves roll`/i) ? 1 : 0
@@ -95,9 +94,9 @@ export const formatHealthEvents = (events: FetchedEvents[]) => {
 				} else if (adductors || hamstrings || powermoveStretch || quads || hipFlexors || pigeon || butterfly || glutes || sideHipStretch) {
 					// LOWER BODY => do min 6/9 daily
 					lowerBodyData.push([date, adductors + hamstrings + powermoveStretch + quads + hipFlexors + pigeon + butterfly + glutes + sideHipStretch])
-				} else if (shoulderFlexionChair || shoulderFlexionHang || shoulderExtRotation || shoulderIntRotation || shouldersExtension) {
-					// SHOULDERS => do min 4/5 daily
-					shoulderData.push([date, shoulderFlexionChair + shoulderFlexionHang + shoulderExtRotation + shoulderIntRotation + shouldersExtension])
+				} else if (shoulderFlexion || shoulderExtRotation || shoulderIntRotation || shouldersExtension) {
+					// SHOULDERS => do all 4 daily
+					shoulderData.push([date, shoulderFlexion + shoulderExtRotation + shoulderIntRotation + shouldersExtension])
 				} else if (quadsRoll || ITBandRoll || calvesRoll || hamstringsRoll || glutesRoll || trapsRoll) {
 					// ROLL => 30mn daily
 					rollData.push([date, durationHours])
