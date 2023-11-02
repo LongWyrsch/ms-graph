@@ -28,6 +28,7 @@ const Dashboard = () => {
 	let VO2Data: CalendarChartData | null = null
 	let wristsData: CalendarChartData | null = null
 	let lowerBodyData: CalendarChartData | null = null
+	let spineData: CalendarChartData | null = null
 	let shoulderData: CalendarChartData | null = null
 	let rollData: CalendarChartData | null = null
 	let neckData: CalendarChartData | null = null
@@ -41,14 +42,15 @@ const Dashboard = () => {
 		sleepData = formatSleepEvents(fetchedEvents.sleepEvents)
 		bboyData = formatBboyEvents(fetchedEvents.bboyEvents)
 		
-		const [strength, VO2, wrists, lowerBody, shoulder, roll, neck, floss] = formatHealthEvents(fetchedEvents.healthEvents)
+		const [strength, VO2, wrists, lowerBody, spine, shoulder, roll, neckFlex, floss] = formatHealthEvents(fetchedEvents.healthEvents)
 		strengthData = strength
 		VO2Data = VO2
 		wristsData = wrists
 		lowerBodyData = lowerBody
+		spineData = spine
 		shoulderData = shoulder
 		rollData = roll
-		neckData = neck
+		neckData = neckFlex
 		flossData = floss
 
 		DEUData = formatDEUEvents(fetchedEvents.studyEvents)
@@ -79,6 +81,7 @@ const Dashboard = () => {
 			{VO2Data && <VO2 data={VO2Data} />}
 			{wristsData && <Mobility data={wristsData} title="Wrists (do all 4)" lBound={4} uBound={4} />}
 			{lowerBodyData && <Mobility data={lowerBodyData} title="Lower Body (min 6/9 positions)" lBound={6} uBound={9} />}
+			{spineData && <Mobility data={spineData} title="Spine (min 1/5 positions)" lBound={1} uBound={5} />}
 			{shoulderData && <Mobility data={shoulderData} title="Shoulder (min 3/4 positions)" lBound={3} uBound={4} />}
 			{rollData && <Mobility data={rollData} title="Roll (min 30mn)" lBound={0.5} uBound={1} />}
 			{neckData && <Mobility data={neckData} title="Neck (every 3 days)" lBound={0} uBound={3} />}
